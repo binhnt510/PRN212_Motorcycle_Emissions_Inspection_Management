@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace App_MotoEmissions
 {
@@ -20,5 +21,36 @@ namespace App_MotoEmissions
         {
             InitializeComponent();
         }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            string email = EmailTextBox.Text;
+            string password = PasswordBox.Password;
+
+            // Kiểm tra thông tin đăng nhập (ví dụ đơn giản)
+            if (email == "test@example.com" && password == "password")
+            {
+                MessageBox.Show("Login successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Invalid email or password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Đóng ứng dụng
+            Application.Current.Shutdown();
+        }
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow registerWindow = new RegisterWindow(); // Tạo một đối tượng của màn hình đăng ký
+            registerWindow.Show(); // Hiển thị màn hình đăng ký
+            this.Close(); // Đóng màn hình đăng nhập nếu cần
+        }
+
+
     }
 }
