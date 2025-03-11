@@ -1,0 +1,76 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\FPT_Uni\\Ky5\\PRN212\\PRN212_Project_Motorcycle\\PRN212_Motorcycle_Emissions_Inspection_Management\\App_MotoEmissions\\App_MotoEmissions.csproj": {}
+  },
+  "projects": {
+    "D:\\FPT_Uni\\Ky5\\PRN212\\PRN212_Project_Motorcycle\\PRN212_Motorcycle_Emissions_Inspection_Management\\App_MotoEmissions\\App_MotoEmissions.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\FPT_Uni\\Ky5\\PRN212\\PRN212_Project_Motorcycle\\PRN212_Motorcycle_Emissions_Inspection_Management\\App_MotoEmissions\\App_MotoEmissions.csproj",
+        "projectName": "App_MotoEmissions",
+        "projectPath": "D:\\FPT_Uni\\Ky5\\PRN212\\PRN212_Project_Motorcycle\\PRN212_Motorcycle_Emissions_Inspection_Management\\App_MotoEmissions\\App_MotoEmissions.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "D:\\FPT_Uni\\Ky5\\PRN212\\PRN212_Project_Motorcycle\\PRN212_Motorcycle_Emissions_Inspection_Management\\App_MotoEmissions\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Phan_mem_va_bo_nho\\Microsoft Visual Studio2022Community\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
