@@ -28,9 +28,13 @@ namespace App_MotoEmissions
             string password = PasswordBox.Password;
 
             // Kiểm tra thông tin đăng nhập (ví dụ đơn giản)
-            if (email == "test@example.com" && password == "password")
+
+            if (UserAccountDAO.GetAccountWithEmailPass(email,UserAccountDAO.encryptPassword(password)))
             {
                 MessageBox.Show("Login successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                UserHomeWindow userHomeWindow = new UserHomeWindow();  
+                userHomeWindow.Show();
+
             }
             else
             {
