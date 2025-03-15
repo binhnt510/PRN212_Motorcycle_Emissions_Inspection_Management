@@ -14,6 +14,7 @@ public partial class UserAccount
     public string PhoneNumber { get; set; } = null!;
 
     public string PasswordHash { get; set; } = null!;
+    public string Address { get; set; }
 
     public string Role { get; set; } = null!;
 

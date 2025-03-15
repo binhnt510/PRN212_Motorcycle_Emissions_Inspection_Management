@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using App_MotoEmissions.Models;
+using Microsoft.Identity.Client;
 
 namespace App_MotoEmissions
 {
@@ -36,10 +38,25 @@ namespace App_MotoEmissions
                 string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(phone) ||
                 string.IsNullOrWhiteSpace(address))
             {
-                MessageBox.Show("Please fill in all fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                
+                  MessageBox.Show("Please fill in all fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                  return;
+                
+            }
+            if (UserAccountDAO.CheckEmailExist(email)){
+                MessageBox.Show("Email existed", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
+            UserAccount newAccount = new UserAccount()
+            {
+                FullName = fullName,
+                Email = email,
+                PasswordHash = UserAccountDAO.encryptPassword(password),
+                PhoneNumber = phone,
+                Address = address,
+                Role = "Owner"
+            };
+            UserAccountDAO.AddAccount(newAccount);
             // Thực hiện logic đăng ký (lưu vào cơ sở dữ liệu, v.v.)
             MessageBox.Show("Registration successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
