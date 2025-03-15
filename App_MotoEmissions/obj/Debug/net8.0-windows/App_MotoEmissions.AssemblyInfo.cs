@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("App_MotoEmissions")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+04f74314605e6ed6bfe4b803b1a7b49ef5242caa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6ea7670f9cd960f074b4e1ae8383b900478d1219")]
 [assembly: System.Reflection.AssemblyProductAttribute("App_MotoEmissions")]
 [assembly: System.Reflection.AssemblyTitleAttribute("App_MotoEmissions")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
