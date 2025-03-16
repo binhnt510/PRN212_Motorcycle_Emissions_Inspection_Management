@@ -15,9 +15,10 @@ public partial class Vehicle
 
     public string Model { get; set; } = null!;
 
-    public int? ManufactureYear { get; set; }
+    public int ManufactureYear { get; set; }
 
     public string? FuelType { get; set; }
+    public string EngineNumber { get; set; } = null!;
 
     public DateTime? CreatedAt { get; set; }
 

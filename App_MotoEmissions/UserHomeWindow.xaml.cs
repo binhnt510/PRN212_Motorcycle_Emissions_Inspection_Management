@@ -11,21 +11,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using App_MotoEmissions.EntityView;
-using App_MotoEmissions.Models;
 
 namespace App_MotoEmissions
 {
     /// <summary>
-    /// Interaction logic for VehicleManagement.xaml
+    /// Interaction logic for UserHomeWindow.xaml
     /// </summary>
-    public partial class VehicleManagement : Window
+    public partial class UserHomeWindow : Window
     {
-        public VehicleManagement()
+        public UserHomeWindow()
         {
-            InitializeComponent(); string? userEmail = SessionManager.UserEmail;
-            LoadDataGridVehicles();
+            InitializeComponent();
         }
+
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
 
@@ -49,18 +47,6 @@ namespace App_MotoEmissions
         private void dgAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-        }
-        void LoadDataGridVehicles()
-        {
-            UserAccount? acc = SessionManager.UserAccount;
-            var vehicles = VehicleDAO.GetVehicleByOwnerIEmail(acc.Email);
-            var vehicleViewModels = vehicles.Select((v, index) => new VehicleViewModel
-            {
-                Number = index + 1,
-                Vehicle = v
-            }).ToList();
-
-            this.dgVehicles.ItemsSource = vehicleViewModels;
         }
     }
 }
