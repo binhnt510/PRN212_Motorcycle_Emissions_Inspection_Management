@@ -29,11 +29,13 @@ namespace App_MotoEmissions
 
             // Kiểm tra thông tin đăng nhập (ví dụ đơn giản)
 
-            if (UserAccountDAO.GetAccountWithEmailPass(email,UserAccountDAO.encryptPassword(password)))
+            if (UserAccountDAO.CheckAccountWithEmailPass(email,UserAccountDAO.encryptPassword(password)))
             {
                 MessageBox.Show("Login successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                UserHomeWindow userHomeWindow = new UserHomeWindow();  
-                userHomeWindow.Show();
+                var accout = UserAccountDAO.GetAccountWithEmail(email);
+                SessionManager.UserAccount = accout;
+                VehicleManagement vehicleManagement = new VehicleManagement();
+                vehicleManagement.Show();
 
             }
             else

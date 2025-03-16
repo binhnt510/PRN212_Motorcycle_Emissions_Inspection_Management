@@ -36,7 +36,7 @@ namespace App_MotoEmissions
                 return sb.ToString();
             }
         }
-        public static bool GetAccountWithEmailPass( string email, string pass)
+        public static bool CheckAccountWithEmailPass( string email, string pass)
         {
             PVehicleContext context = new PVehicleContext();
             var userAccount = context.UserAccounts
@@ -53,6 +53,14 @@ namespace App_MotoEmissions
              .FirstOrDefault();  // Trả về tài khoản đầu tiên khớp, hoặc null nếu không có
             if (userAccount == null) { return false; }
             return true;
+        }
+        public static UserAccount GetAccountWithEmail(string email)
+        {
+            PVehicleContext context = new PVehicleContext();
+            var userAccount = context.UserAccounts
+             .Where(x => x.Email == email )
+             .FirstOrDefault();  // Trả về tài khoản đầu tiên khớp, hoặc null nếu không có
+            return userAccount;
         }
 
     }
