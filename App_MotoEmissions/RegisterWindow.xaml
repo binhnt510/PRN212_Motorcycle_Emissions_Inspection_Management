@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen">
     <Grid Background="AliceBlue" Margin="0,0,0,-6">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-            <TextBlock Text="Register" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+            <TextBlock Text="Đăng ký" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Họ và Tên:" FontSize="14" FontWeight="Bold" Margin="5,0,0,5"/>

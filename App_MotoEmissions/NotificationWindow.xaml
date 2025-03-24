@@ -28,11 +28,10 @@
             <GroupBox.Header>
                 <TextBlock Text="📢 Danh sách Thông báo" FontSize="20" FontWeight="Bold"/>
             </GroupBox.Header>
-            <DataGrid x:Name="dataGridNotifications" AutoGenerateColumns="False">
+            <DataGrid x:Name="dataGridNotifications" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Ngày" Binding="{Binding SentDate}" Width="100"/>
-                    <DataGridTextColumn Header="Nội dung" Binding="{Binding Message}" Width="300"/>
-                    <DataGridTextColumn Header="Trạng thái" Binding="{Binding IsRead}" Width="80"/>
+                    <DataGridTextColumn Header="Ngày" Binding="{Binding SentDate}" Width="0.6*"/>
+                    <DataGridTextColumn Header="Nội dung" Binding="{Binding Message}" Width="2*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
@@ -42,7 +41,7 @@
             <GroupBox.Header>
                 <TextBlock Text="🚨 Danh sách Vi phạm" FontSize="20" FontWeight="Bold"/>
             </GroupBox.Header>
-            <DataGrid x:Name="dataGridViolations" AutoGenerateColumns="False" >
+            <DataGrid x:Name="dataGridViolations" AutoGenerateColumns="False"  IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Biển số xe" Binding="{Binding Vehicle.LicensePlate}" Width="100"/>
                     <DataGridTextColumn Header="Ngày vi phạm" Binding="{Binding ViolationDate}" Width="120"/>

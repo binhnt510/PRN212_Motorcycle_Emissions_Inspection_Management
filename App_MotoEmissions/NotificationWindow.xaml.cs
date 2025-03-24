@@ -26,10 +26,13 @@ namespace App_MotoEmissions
         {
             InitializeComponent();
             LoadDataGridViolations();
+            LoadDataGridNotifications();
         }
 
         private void RefreshData(object sender, RoutedEventArgs e)
         {
+            LoadDataGridViolations();
+            LoadDataGridNotifications();
 
         }
         void LoadDataGridViolations()
@@ -37,6 +40,12 @@ namespace App_MotoEmissions
             UserAccount? acc = SessionManager.UserAccount;
             var violation = ViolationDAO.GetViolations(acc.Email);
             this.dataGridViolations.ItemsSource = violation;
+        }
+        void LoadDataGridNotifications()
+        {
+            UserAccount? acc = SessionManager.UserAccount;
+            var noti = NotificationDAO.GetNotificationByOwner(acc);
+            this.dataGridNotifications.ItemsSource = noti;
         }
     }
 }
