@@ -10,18 +10,33 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using App_MotoEmissions.DAO;
+using App_MotoEmissions.Models;
 
 namespace App_MotoEmissions
 {
     /// <summary>
     /// Interaction logic for NotificationWindow.xaml
     /// </summary>
-    public partial class NotificationWindow : Window
+    public partial class NotificationWindow : UserControl
     {
         public NotificationWindow()
         {
             InitializeComponent();
+            LoadDataGridViolations();
+        }
+
+        private void RefreshData(object sender, RoutedEventArgs e)
+        {
+
+        }
+        void LoadDataGridViolations()
+        {
+            UserAccount? acc = SessionManager.UserAccount;
+            var violation = ViolationDAO.GetViolations(acc.Email);
+            this.dataGridViolations.ItemsSource = violation;
         }
     }
 }
