@@ -60,19 +60,19 @@
             </GroupBox.Header>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="36.62"/>
                     <!-- Row 0 -->
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="36.62"/>
                     <!-- Row 1 -->
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="36.62"/>
                     <!-- Row 2 -->
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="36.62"/>
                     <!-- Row 3 -->
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="36.62"/>
                     <!-- Row 4 -->
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="36.62"/>
                     <!-- Row 5 -->
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -119,7 +119,7 @@
                 <ComboBox Grid.Row="1" Grid.Column="4" x:Name="cbStations" Margin="0,5,10,5" FontSize="14"/>
 
                 <!-- Nút đăng ký kiểm định & Hủy đăng ký -->
-                <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,5">
+                <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
                     <Button Content="Đăng ký kiểm định" Width="150" Click="RegisterInspection" FontSize="14"/>
                     <Button Content="Hủy đăng ký" Width="150" Click="CancelRegistration" Margin="40,0,0,0" FontSize="14"/>
                     <Button Content="Xóa nội dung" Width="150" Click="ClearRegistration" Margin="40,0,0,0" FontSize="14"/>

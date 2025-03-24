@@ -13,7 +13,5 @@ public partial class Notification
 
     public DateTime? SentDate { get; set; }
 
-    public bool? IsRead { get; set; }
-
     public virtual UserAccount? User { get; set; }
 }

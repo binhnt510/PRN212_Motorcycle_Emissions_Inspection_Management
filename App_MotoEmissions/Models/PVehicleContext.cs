@@ -124,7 +124,6 @@ public partial class PVehicleContext : DbContext
             entity.ToTable("Notification");
 
             entity.Property(e => e.NotificationId).HasColumnName("NotificationID");
-            entity.Property(e => e.IsRead).HasDefaultValue(false);
             entity.Property(e => e.Message).HasMaxLength(255);
             entity.Property(e => e.SentDate)
                 .HasDefaultValueSql("(getdate())")
