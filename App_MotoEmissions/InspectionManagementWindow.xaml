@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="App_MotoEmissions.InspectionManagementWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:App_MotoEmissions"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="800">
+    <Grid Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*" />
+            <!-- Lịch sử kiểm định -->
+            <RowDefinition Height="15"/>
+            <!-- Khoảng cách -->
+            <RowDefinition Height="1.3*"/>
+            <!-- Form đăng ký kiểm định -->
+        </Grid.RowDefinitions>
+
+        <!-- Lịch sử kiểm định -->
+        <GroupBox Grid.Row="0">
+            <GroupBox.Header>
+                <TextBlock Text="Lịch sử kiểm định" FontSize="17" FontWeight="Black" Margin="0,10"/>
+            </GroupBox.Header>
+            <Grid>
+                <DataGrid x:Name="dataGridInspectionHistory" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dgInspection">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Biển số xe" Binding="{Binding Vehicle.LicensePlate}" Width="180" FontSize="15"/>
+                        <DataGridTextColumn Header="Ngày kiểm định" Binding="{Binding ScheduledDate}" Width="200" FontSize="15"/>
+                        <DataGridTextColumn Header="Cơ sở kiểm định" Binding="{Binding Center.Name}" Width="210" FontSize="15"/>
+                        <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="*" FontSize="15" >
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Style.Triggers>
+                                        <!-- Triggers để thay đổi màu chữ khi Status là 'Chưa xử lý' -->
+                                        <DataTrigger Binding="{Binding Status}" Value="Chờ xác nhận">
+                                            <DataTrigger.Setters>
+                                                <Setter Property="Foreground" Value="Orange"/>
+                                            </DataTrigger.Setters>
+                                        </DataTrigger>
+
+                                        <!-- Triggers để thay đổi màu chữ khi Status là giá trị khác (đã xử lý) -->
+                                        <DataTrigger Binding="{Binding Status}" Value="Đã xác nhận">
+                                            <DataTrigger.Setters>
+                                                <Setter Property="Foreground" Value="Green"/>
+                                            </DataTrigger.Setters>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+
+        <!-- Form đăng ký kiểm định -->
+        <GroupBox Grid.Row="2">
+            <GroupBox.Header>
+                <TextBlock Text="📝 Đăng ký Kiểm định" FontSize="17" FontWeight="Black" Margin="0,10"/>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Row 0 -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Row 1 -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Row 2 -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Row 3 -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Row 4 -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Row 5 -->
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140"/>
+                    <!-- Cột 1 (Nhãn) -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Cột 1 (Giá trị) -->
+                    <ColumnDefinition Width="40"/>
+                    <!-- Khoảng cách -->
+                    <ColumnDefinition Width="140"/>
+                    <!-- Cột 2 (Nhãn) -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Cột 2 (Giá trị) -->
+                </Grid.ColumnDefinitions>
+
+                <!-- Cột 1 (Thông tin xe) -->
+                <Label Grid.Row="0" Grid.Column="0" Content="Biển số xe:" VerticalAlignment="Center" FontSize="15"/>
+                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="cbVehicles" Margin="0,5,10,5" FontSize="14" SelectionChanged="cbVehicles_SelectionChanged"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Hãng xe:" VerticalAlignment="Center" FontSize="15"/>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtBrand" IsReadOnly="True" Margin="0,5,10,5" FontSize="14"/>
+
+                <TextBox x:Name="txtid" Visibility="Hidden"/>
+
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Mẫu xe:" VerticalAlignment="Center" FontSize="15"/>
+                <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtModel" IsReadOnly="True" Margin="0,5,10,5" FontSize="14"/>
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Năm sản xuất:" VerticalAlignment="Center" FontSize="15"/>
+                <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtYear" IsReadOnly="True" Margin="0,5,10,5" FontSize="14"/>
+
+                <Label Grid.Row="4" Grid.Column="0" Content="Số khung xe:" VerticalAlignment="Center" FontSize="15"/>
+                <TextBox Grid.Row="4" Grid.Column="1" x:Name="txtChassisNumber" IsReadOnly="True" Margin="0,5,10,5" FontSize="14"/>
+
+                <Label Grid.Row="5" Grid.Column="0" Content="Loại nhiên liệu:" VerticalAlignment="Center" FontSize="15"/>
+                <TextBox Grid.Row="5" Grid.Column="1" x:Name="txtFuelType" IsReadOnly="True" Margin="0,5,10,5" FontSize="14"/>
+
+                <!-- Cột 2 (Chọn phương tiện, cơ sở, ngày kiểm định) -->
+
+                <Label Grid.Row="0" Grid.Column="3" Content="Ngày kiểm định:" VerticalAlignment="Center" FontSize="15"/>
+                <DatePicker Grid.Row="0" Grid.Column="4" x:Name="dpInspectionDate" Margin="0,5,10,5" FontSize="14"/>
+
+                <Label Grid.Row="1" Grid.Column="3" Content="Cơ sở kiểm định:" VerticalAlignment="Center" FontSize="15"/>
+                <ComboBox Grid.Row="1" Grid.Column="4" x:Name="cbStations" Margin="0,5,10,5" FontSize="14"/>
+
+                <!-- Nút đăng ký kiểm định & Hủy đăng ký -->
+                <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,5">
+                    <Button Content="Đăng ký kiểm định" Width="150" Click="RegisterInspection" FontSize="14"/>
+                    <Button Content="Hủy đăng ký" Width="150" Click="CancelRegistration" Margin="40,0,0,0" FontSize="14"/>
+                    <Button Content="Xóa nội dung" Width="150" Click="ClearRegistration" Margin="40,0,0,0" FontSize="14"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

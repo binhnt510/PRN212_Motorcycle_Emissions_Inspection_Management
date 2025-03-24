@@ -1,0 +1,32 @@
+﻿<Window x:Class="App_MotoEmissions.DashboardUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:App_MotoEmissions"
+        mc:Ignorable="d"
+        Title="DashboardUserWindow" Height="700" Width="1300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <!-- Khung chọn -->
+            <ColumnDefinition Width="*"/>
+            <!-- Khu vực hiển thị -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Danh sách menu chọn màn hình -->
+        <StackPanel Grid.Column="0" Background="#FF153D60">
+            <Image Source="/img/user1.png"  Height="90" Width="164"  Margin="0,15,0,10"/>
+
+            <TextBlock Name="txtName" HorizontalAlignment="Center" Margin="10,10,10,20" Foreground="White" FontWeight="Black" FontSize="20"/>
+            <Button Content="Thông báo &amp; Vi phạm" Click="ScreenNoti_Click" Foreground="White" Background="#FF0F263B" Height="50" BorderThickness="0,0,0,0" FontSize="15" Margin="0,0,0,10"/>
+            <Button Content="Quản lý phương tiện" Click="ScreenVehi_Click" Foreground="White" Background="#FF0F263B" Height="50" BorderThickness="0" FontSize="15" Margin="0,10,0,10"/>
+            <Button Content="Kiểm định khí thải" Click="ScreenInspecClick" Foreground="White" Background="#FF0F263B" Height="50" BorderThickness="0" FontSize="15" Margin="0,10,0,10"/>
+            <Button Content="Đăng xuất" Click="LogoutClick" Foreground="White" Background="#FF0F263B" Height="50" BorderThickness="0" FontSize="15" Margin="0,10,0,10"/>
+
+        </StackPanel>
+
+        <!-- ContentControl để hiển thị màn hình -->
+        <ContentControl x:Name="MainContent" Grid.Column="1"/>
+    </Grid>
+</Window>

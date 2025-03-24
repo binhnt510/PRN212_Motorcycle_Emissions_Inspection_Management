@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using App_MotoEmissions.Models;
 using System.Security.Cryptography;
 
-namespace App_MotoEmissions
+namespace App_MotoEmissions.DAO
 {
     class UserAccountDAO
     {
@@ -36,7 +36,7 @@ namespace App_MotoEmissions
                 return sb.ToString();
             }
         }
-        public static bool CheckAccountWithEmailPass( string email, string pass)
+        public static bool CheckAccountWithEmailPass(string email, string pass)
         {
             PVehicleContext context = new PVehicleContext();
             var userAccount = context.UserAccounts
@@ -58,7 +58,7 @@ namespace App_MotoEmissions
         {
             PVehicleContext context = new PVehicleContext();
             var userAccount = context.UserAccounts
-             .Where(x => x.Email == email )
+             .Where(x => x.Email == email)
              .FirstOrDefault();  // Trả về tài khoản đầu tiên khớp, hoặc null nếu không có
             return userAccount;
         }

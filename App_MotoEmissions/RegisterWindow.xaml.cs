@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using App_MotoEmissions.DAO;
 using App_MotoEmissions.Models;
 using Microsoft.Identity.Client;
 
@@ -39,12 +40,12 @@ namespace App_MotoEmissions
                 string.IsNullOrWhiteSpace(address))
             {
                 
-                  MessageBox.Show("Please fill in all fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                  MessageBox.Show("Vui lòng điền tất cả các thông tin.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                   return;
                 
             }
             if (UserAccountDAO.CheckEmailExist(email)){
-                MessageBox.Show("Email existed", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Email đã tồn tại.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             UserAccount newAccount = new UserAccount()
@@ -58,7 +59,7 @@ namespace App_MotoEmissions
             };
             UserAccountDAO.AddAccount(newAccount);
             // Thực hiện logic đăng ký (lưu vào cơ sở dữ liệu, v.v.)
-            MessageBox.Show("Registration successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Đăng ký tài khoản thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

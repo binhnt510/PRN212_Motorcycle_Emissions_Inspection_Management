@@ -14,14 +14,14 @@
 
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Email:" FontSize="14" FontWeight="Bold" Margin="5,0,0,5" />
-                <TextBox Name="EmailTextBox" Width="300" Height="30"/>
+                <TextBox Name="EmailTextBox" Width="300" Height="30" VerticalContentAlignment="Center"/>
                 
             </StackPanel>
 
             <!-- Ô nhập Password -->
             <StackPanel Margin="0,0,0,20">
                 <TextBlock Text="Mật khẩu:" FontSize="14" FontWeight="Bold" Margin="5,0,0,5"/>
-                <PasswordBox Name="PasswordBox" Width="300" Height="30"  />
+                <PasswordBox Name="PasswordBox" Width="300" Height="30" VerticalContentAlignment="Center"/>
             </StackPanel>
 
             <Button Content="Đăng nhập" Width="300" Height="30" Click="LoginButton_Click" Background="LightGreen"/>

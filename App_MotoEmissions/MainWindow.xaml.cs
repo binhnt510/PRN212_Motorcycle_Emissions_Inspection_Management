@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using App_MotoEmissions.DAO;
 using Microsoft.Win32;
 
 namespace App_MotoEmissions
@@ -31,16 +32,16 @@ namespace App_MotoEmissions
 
             if (UserAccountDAO.CheckAccountWithEmailPass(email,UserAccountDAO.encryptPassword(password)))
             {
-                MessageBox.Show("Login successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 var accout = UserAccountDAO.GetAccountWithEmail(email);
                 SessionManager.UserAccount = accout;
-                VehicleManagement vehicleManagement = new VehicleManagement();
-                vehicleManagement.Show();
+                DashboardUserWindow dashboard = new DashboardUserWindow();
+                dashboard.Show();
+                this.Close();
 
             }
             else
             {
-                MessageBox.Show("Invalid email or password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Email hoặc mật khẩu sai.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
