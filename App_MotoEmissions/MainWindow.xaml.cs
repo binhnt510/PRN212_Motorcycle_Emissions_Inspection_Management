@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using App_MotoEmissions.DAO;
+using App_MotoEmissions.Models;
 using Microsoft.Win32;
 
 namespace App_MotoEmissions
@@ -34,8 +35,9 @@ namespace App_MotoEmissions
             {
                 var accout = UserAccountDAO.GetAccountWithEmail(email);
                 SessionManager.UserAccount = accout;
-                DashboardUserWindow dashboard = new DashboardUserWindow();
-                dashboard.Show();
+                //DashboardUserWindow dashboard = new DashboardUserWindow();
+               // dashboard.Show();
+                CheckUserRoleAndRedirect(accout);
                 this.Close();
 
             }
@@ -45,7 +47,35 @@ namespace App_MotoEmissions
             }
         }
 
-        
+        private void CheckUserRoleAndRedirect(UserAccount account)
+        {
+            switch (account.Role.ToLower())
+            {
+                case "quản trị viên":
+                    DashboardAdminWindow adminWindow = new DashboardAdminWindow();
+                    adminWindow.Show();
+                    break;
+
+                case "chủ phương tiện":
+                    DashboardUserWindow userWindow = new DashboardUserWindow();
+                    userWindow.Show();
+                    break;
+
+                case "cảnh sát giao thông":
+                    PoliceCheckWindow policeWindow = new PoliceCheckWindow();
+                    policeWindow.Show();
+                    break;
+                case "kiểm định viên":
+                  //  PoliceCheckWindow policeWindow = new PoliceCheckWindow();
+                 //   policeWindow.Show();
+                    break;
+                default:
+                    MessageBox.Show("Tài khoản không có quyền truy cập.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    break;
+            }
+        }
+
+
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             // Đóng ứng dụng
