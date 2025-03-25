@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:App_MotoEmissions"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="700" d:DesignWidth="1000">
     <Grid Background="AliceBlue" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -28,10 +28,12 @@
             <GroupBox.Header>
                 <TextBlock Text="📢 Danh sách Thông báo" FontSize="20" FontWeight="Bold"/>
             </GroupBox.Header>
-            <DataGrid x:Name="dataGridNotifications" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid x:Name="dataGridNotifications" AutoGenerateColumns="False" IsReadOnly="True" HorizontalGridLinesBrush="#DDDDDD"
+VerticalGridLinesBrush="#DDDDDD"
+AlternatingRowBackground="#F5F5F5">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Ngày" Binding="{Binding SentDate}" Width="0.6*"/>
-                    <DataGridTextColumn Header="Nội dung" Binding="{Binding Message}" Width="2*"/>
+                    <DataGridTextColumn Header="Ngày" Binding="{Binding SentDate}" Width="0.6*" FontSize="15"/>
+                    <DataGridTextColumn Header="Nội dung" Binding="{Binding Message}" Width="2*" FontSize="15"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
@@ -41,12 +43,14 @@
             <GroupBox.Header>
                 <TextBlock Text="🚨 Danh sách Vi phạm" FontSize="20" FontWeight="Bold"/>
             </GroupBox.Header>
-            <DataGrid x:Name="dataGridViolations" AutoGenerateColumns="False"  IsReadOnly="True">
+            <DataGrid x:Name="dataGridViolations" AutoGenerateColumns="False"  IsReadOnly="True" HorizontalGridLinesBrush="#DDDDDD"
+VerticalGridLinesBrush="#DDDDDD"
+AlternatingRowBackground="#F5F5F5">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Biển số xe" Binding="{Binding Vehicle.LicensePlate}" Width="100"/>
-                    <DataGridTextColumn Header="Ngày vi phạm" Binding="{Binding ViolationDate}" Width="120"/>
-                    <DataGridTextColumn Header="Số tiền phạt" Binding="{Binding FineAmount}" Width="100"/>
-                    <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="100">
+                    <DataGridTextColumn Header="Biển số xe" Binding="{Binding Vehicle.LicensePlate}" Width="100" FontSize="15"/>
+                    <DataGridTextColumn Header="Ngày vi phạm" Binding="{Binding ViolationDate}" Width="160" FontSize="15"/>
+                    <DataGridTextColumn Header="Số tiền phạt" Binding="{Binding FineAmount}" Width="100" FontSize="15"/>
+                    <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="100" FontSize="15">
                         <DataGridTextColumn.CellStyle>
                             <Style TargetType="DataGridCell">
                                 <Style.Triggers>
@@ -67,7 +71,7 @@
                             </Style>
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Chi tiết" Binding="{Binding ViolationDetails}" Width="*"/>
+                    <DataGridTextColumn Header="Chi tiết" Binding="{Binding ViolationDetails}" Width="*" FontSize="15"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
