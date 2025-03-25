@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App_MotoEmissions.Models;
 
@@ -23,6 +24,9 @@ public partial class UserAccount
     public bool? IsActive { get; set; }
 
     public int? CenterId { get; set; }
+    
+    [NotMapped]  // Không ánh xạ vào database
+    public string CenterName { get; set; }
 
     public virtual InspectionCenter? Center { get; set; }
 

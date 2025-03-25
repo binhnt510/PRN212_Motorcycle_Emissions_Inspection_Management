@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="App_MotoEmissions.ViolationReportControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Height="450" Width="700">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="10">
+            <!-- Form nhập dữ liệu -->
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Biển số xe:" Width="auto"/>
+                <TextBox x:Name="txtLicensePlate" Width="100"/>
+                <TextBlock Text="Chi tiết vi phạm:" Width="auto"/>
+                <TextBox x:Name="txtDetails" Width="250"/>
+                <TextBlock Text="Tiền phạt:" Width="80"/>
+                <TextBox x:Name="txtFineAmount" Width="100"/>
+            </StackPanel>
+
+            <!-- Các nút điều khiển -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                <Button Content="Thêm" Width="80" Click="AddViolation"/>
+                <Button Content="Sửa" Width="80" Click="UpdateViolation"/>
+                <Button Content="Xóa" Width="80" Click="DeleteViolation"/>
+                <Button Content="Tải lại" Width="80" Click="ReloadViolations"/>
+            </StackPanel>
+
+            <!-- DataGrid hiển thị danh sách vi phạm -->
+            <DataGrid x:Name="dgViolations" AutoGenerateColumns="False" SelectionChanged="dgViolations_SelectionChanged" Height="250">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ViolationId}" Width="50"/>
+                    <DataGridTextColumn Header="Biển số xe" Binding="{Binding Vehicle.LicensePlate, TargetNullValue='Không xác định'}" Width="120"/>
+                    <DataGridTextColumn Header="Chi tiết" Binding="{Binding ViolationDetails}" Width="200"/>
+                    <DataGridTextColumn Header="Tiền phạt" Binding="{Binding FineAmount}" Width="100"/>
+                    <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</UserControl>

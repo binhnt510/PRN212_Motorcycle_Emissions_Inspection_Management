@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using App_MotoEmissions.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace App_MotoEmissions.DAO
@@ -70,5 +71,43 @@ namespace App_MotoEmissions.DAO
                 
             }
         }
+
+        public static VehicleInspectionInfo GetInspectionInfoByPlate(string licensePlate)
+        {
+            using (var context = new PVehicleContext())
+            {
+                var result = (from v in context.Vehicles
+                              join u in context.UserAccounts on v.OwnerId equals u.UserId
+                              join i in context.Inspections on v.VehicleId equals i.VehicleId into inspections
+                              from i in inspections.DefaultIfEmpty()
+                              join e in context.EmissionTests on i.InspectionId equals e.InspectionId into emissionTests
+                              from e in emissionTests.DefaultIfEmpty()
+                              where v.LicensePlate == licensePlate
+                              orderby i != null ? i.ScheduledDate : DateTime.MinValue descending // Tránh lỗi null khi sắp xếp
+                              select new VehicleInspectionInfo
+                              {
+                                  LicensePlate = v.LicensePlate,
+                                  Brand = v.Brand,
+                                  Model = v.Model,
+                                  ManufactureYear = v.ManufactureYear,
+                                  EngineNumber = v.EngineNumber,
+                                  FuelType = v.FuelType,
+                                  OwnerName = u.FullName,
+                                  OwnerEmail = u.Email,
+                                  OwnerPhone = u.PhoneNumber,
+                                  ScheduledDate = i != null ? i.ScheduledDate : (DateTime?)null,
+                                  Status = i != null ? i.Status : "Chưa đăng ký",
+                                  CO_Level = e != null ? e.CoLevel : (double?)null,
+                                  HC_Level = e != null ? e.HcLevel : (double?)null,
+                                  NOx_Level = e != null ? e.NoxLevel : (double?)null,
+                                  Result = e != null ? e.Result : "Chưa kiểm tra",
+                                  TestDate = e != null ? e.TestDate : (DateTime?)null
+                              }).FirstOrDefault();
+
+                return result;
+            }
+        }
+
+      
     }
 }

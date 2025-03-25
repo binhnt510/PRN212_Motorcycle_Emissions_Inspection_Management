@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_MotoEmissions"
         mc:Ignorable="d"
-        Title="DashboardAdminWindow" Height="450" Width="800">
+        Title="DashboardAdminWindow" Height="473" Width="800">
     <Grid>
-        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <!-- Khung chọn -->
+                <ColumnDefinition Width="*"/>
+                <!-- Khu vực hiển thị -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Danh sách menu chọn màn hình -->
+            <StackPanel Grid.Column="0" Background="#FF153D60">
+                <Image Source="/img/user1.png"  Height="90" Width="164"  Margin="0,15,0,10"/>
+
+                <TextBlock Name="txtName" HorizontalAlignment="Center" Margin="10,10,10,20" Foreground="White" FontWeight="Black" FontSize="20"/>
+                <Button Content="Quản lý người dùng" Click="Button_Click" Foreground="White" Background="#FF0F263B" Height="50" BorderThickness="0,0,0,0" FontSize="15" Margin="0,0,0,10"/>
+                <Button Content="Quản lý cơ sở kiểm định" Click="Button_Click_1" Foreground="White" Background="#FF0F263B" Height="50" BorderThickness="0" FontSize="15" Margin="0,10,0,10"/>
+                <Button Content="Báo cáo và thống kê" Click="Button_Click_2" Foreground="White" Background="#FF0F263B" Height="50" BorderThickness="0" FontSize="15" Margin="0,10,0,10"/>
+                <Button Content="Đăng xuất" Click="Button_Click_3" Foreground="White" Background="#FF0F263B" Height="50" BorderThickness="0" FontSize="15" Margin="0,10,0,10"/>
+
+            </StackPanel>
+
+            <!-- ContentControl để hiển thị màn hình -->
+            <ContentControl x:Name="MainContent" Grid.Column="1" Margin="0,0,0,-20"/>
+        </Grid>
     </Grid>
 </Window>

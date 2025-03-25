@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="App_MotoEmissions.InspectionCheckControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Width="400">
+    <Grid>
+        <StackPanel Margin="20">
+            <TextBlock Text="Tra cứu kiểm định phương tiện" FontSize="20" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            <TextBox x:Name="txtLicensePlate" Width="300" Margin="0,0,0,10" />
+
+            <Button Content="Tra cứu" Click="SearchVehicle" Width="100" Background="#0078D7" Foreground="White"/>
+
+            <Border x:Name="ResultPanel" Visibility="Collapsed" BorderBrush="Gray" BorderThickness="1" Padding="10" Margin="0,20,0,0">
+                <StackPanel>
+                    <TextBlock Text="Thông tin phương tiện" FontSize="16" FontWeight="Bold"/>
+                    <TextBlock x:Name="txtVehicleInfo" TextWrapping="Wrap" Margin="0,5,0,10"/>
+
+                    <TextBlock Text="Thông tin kiểm định" FontSize="16" FontWeight="Bold"/>
+                    <TextBlock x:Name="txtInspectionInfo" TextWrapping="Wrap" Margin="0,5,0,10"/>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </Grid>
+</UserControl>
