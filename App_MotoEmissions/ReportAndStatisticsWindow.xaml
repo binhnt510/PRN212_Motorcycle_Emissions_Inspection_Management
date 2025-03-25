@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="App_MotoEmissions.ReportAndStatisticsWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:App_MotoEmissions"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="900">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="10">
+            <!-- Bộ lọc -->
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Từ ngày:" VerticalAlignment="Center" Margin="5"/>
+                <DatePicker x:Name="dpStartDate" Width="120" />
+
+                <TextBlock Text="Đến ngày:" VerticalAlignment="Center" Margin="5"/>
+                <DatePicker x:Name="dpEndDate" Width="120" />
+
+                <TextBlock Text="Khu vực:" VerticalAlignment="Center" Margin="5"/>
+                <ComboBox x:Name="cbAreaFilter" Width="150"/>
+
+                <Button Content="Thống kê" Click="btnGenerateReport_Click" Width="100" Margin="10"/>
+            </StackPanel>
+
+            <!-- Bảng dữ liệu -->
+            <DataGrid x:Name="dgStatistics" AutoGenerateColumns="True" Height="250" Margin="5"/>
+
+            <!-- Biểu đồ -->
+            <TextBlock Text="Tỷ lệ xe đạt tiêu chuẩn khí thải" FontWeight="Bold" Margin="10"/>
+            <Grid x:Name="chartContainer" Height="150"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

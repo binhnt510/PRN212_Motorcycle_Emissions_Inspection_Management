@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="App_MotoEmissions.UserAccountsWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="10">
+            <TextBlock Text="Danh sách người dùng" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" />
+
+            <DataGrid x:Name="dgUsers" AutoGenerateColumns="False" Height="200"
+                      SelectionMode="Single" SelectionChanged="dgUsers_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding UserId}" Width="50"/>
+                    <DataGridTextColumn Header="Tên" Binding="{Binding FullName}" Width="150"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150"/>
+                    <DataGridTextColumn Header="SĐT" Binding="{Binding PhoneNumber}" Width="100"/>
+                    <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="150"/>
+                    <DataGridTextColumn Header="Vai trò" Binding="{Binding Role}" Width="120"/>
+                    <DataGridTextColumn Header="Cơ sở kiểm định" Binding="{Binding CenterName}" Width="150"/>
+                </DataGrid.Columns>
+
+                
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <Button Content="&lt;&lt;" Click="PrevPage" Width="50" Margin="5"/>
+                <TextBlock Text="{Binding currentPage}" FontSize="16" VerticalAlignment="Center"/>
+                <Button Content=">>" Click="NextPage" Width="50" Margin="5"/>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                <TextBlock Text="Tên"/>
+                <TextBox x:Name="txtFullName" Width="250"/>
+
+                <TextBlock Text="Email"/>
+                <TextBox x:Name="txtEmail" Width="250"/>
+
+                <TextBlock Text="Số điện thoại"/>
+                <TextBox x:Name="txtPhone" Width="250"/>
+
+                <TextBlock Text="Mật khẩu"/>
+                <PasswordBox x:Name="txtPassword" Width="250"/>
+
+                <TextBlock Text="Địa chỉ"/>
+                <TextBox x:Name="txtAddress" Width="250"/>
+
+                <TextBlock Text="Vai trò"/>
+                <ComboBox x:Name="cbRole" Width="250" SelectionChanged="cbRole_SelectionChanged">
+                    <ComboBoxItem Content="Chủ phương tiện"/>
+                    <ComboBoxItem Content="Cảnh sát giao thông"/>
+                    <ComboBoxItem Content="Quản trị viên"/>
+                    <ComboBoxItem Content="Kiểm định viên"/>
+                </ComboBox>
+
+                <TextBlock Text="Cơ sở kiểm định" x:Name="lblInspectionCenter" Visibility="Collapsed"/>
+                <ComboBox x:Name="cbInspectionCenter"
+                               SelectedValuePath="CenterId"
+                               DisplayMemberPath="Name"
+                               ItemsSource="{Binding InspectionCenters}" Width="250" />
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Content="Thêm" Click="AddUser" Width="80" Margin="5"/>
+                <Button Content="Sửa" Click="UpdateUser" Width="80" Margin="5"/>
+                <Button Content="Xóa" Click="DeleteUser" Width="80" Margin="5"/>
+                <Button Content="Reset" Click="ResetForm" Width="80" Margin="5"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
