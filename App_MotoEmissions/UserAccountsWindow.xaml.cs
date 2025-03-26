@@ -19,20 +19,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace App_MotoEmissions
 {
-    /// <summary>
-    /// Interaction logic for UserAccountsWindow.xaml
-    /// </summary>
     public partial class UserAccountsWindow : UserControl
     {
         private ObservableCollection<UserAccount> Users;
         private ObservableCollection<InspectionCenter> InspectionCenters;
+        private ObservableCollection<UserAccount> allUsers = new ObservableCollection<UserAccount>();
+        private ObservableCollection<UserAccount> filteredUsers = new ObservableCollection<UserAccount>();
+
         private UserAccount selectedUser;
-        private int currentPage = 1;
+        private readonly UserAccountDAO userAccountDAO = new UserAccountDAO();
         private const int PageSize = 10;
+        private int totalPages;
+        private int currentPage = 1;
 
         public UserAccountsWindow()
         {
             InitializeComponent();
+            totalPages = userAccountDAO.GetTotalPages(PageSize);
             LoadUsers();
             LoadInspectionCenters();
         }
@@ -41,8 +44,10 @@ namespace App_MotoEmissions
         {
             using (var context = new PVehicleContext())
             {
+                totalPages = userAccountDAO.GetTotalPages(PageSize);
+
                 var users = context.UserAccounts
-                                   .Include(u => u.Center) // Load thông tin InspectionCenter
+                                   .Include(u => u.Center)
                                    .OrderBy(u => u.UserId)
                                    .Skip((currentPage - 1) * PageSize)
                                    .Take(PageSize)
@@ -73,19 +78,40 @@ namespace App_MotoEmissions
                     })
                 );
 
+                allUsers = new ObservableCollection<UserAccount>(Users);
                 dgUsers.ItemsSource = Users;
             }
         }
-
-
 
         private void LoadInspectionCenters()
         {
             InspectionCenters = new ObservableCollection<InspectionCenter>(InspectionCenterDAO.GetInspectionCenters());
             cbInspectionCenter.ItemsSource = InspectionCenters;
-            cbInspectionCenter.DisplayMemberPath = "Name"; // Hiển thị thuộc tính Name
+            cbInspectionCenter.DisplayMemberPath = "Name";
         }
 
+        private void SearchUsers(object sender, RoutedEventArgs e)
+        {
+            string nameKeyword = txtSearchName.Text.Trim().ToLower();
+            string phoneKeyword = txtSearchPhone.Text.Trim();
+            string emailKeyword = txtSearchEmail.Text.Trim().ToLower();
+
+            filteredUsers = new ObservableCollection<UserAccount>(
+                allUsers.Where(u => (string.IsNullOrEmpty(nameKeyword) || u.FullName.ToLower().Contains(nameKeyword)) &&
+                                    (string.IsNullOrEmpty(phoneKeyword) || u.PhoneNumber.Contains(phoneKeyword)) &&
+                                    (string.IsNullOrEmpty(emailKeyword) || u.Email.ToLower().Contains(emailKeyword)))
+            );
+
+            dgUsers.ItemsSource = filteredUsers;
+        }
+
+        private void ResetSearch(object sender, RoutedEventArgs e)
+        {
+            txtSearchName.Text = "";
+            txtSearchPhone.Text = "";
+            txtSearchEmail.Text = "";
+            dgUsers.ItemsSource = allUsers;
+        }
 
         private void AddUser(object sender, RoutedEventArgs e)
         {
@@ -135,21 +161,16 @@ namespace App_MotoEmissions
             ResetForm();
         }
 
-        private void DeleteUser(object sender, RoutedEventArgs e)
+        private void ResetForm()
         {
-            if (selectedUser == null)
-            {
-                MessageBox.Show("Vui lòng chọn một tài khoản để xóa!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (MessageBox.Show("Bạn có chắc chắn muốn xóa tài khoản này?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-            {
-                UserAccountDAO.DeleteAccount(selectedUser.UserId);
-                MessageBox.Show("Xóa tài khoản thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                LoadUsers();
-                ResetForm();
-            }
+            txtFullName.Text = "";
+            txtEmail.Text = "";
+            txtPhone.Text = "";
+            txtPassword.Password = "";
+            txtAddress.Text = "";
+            cbRole.SelectedIndex = -1;
+            cbInspectionCenter.SelectedIndex = -1;
+            selectedUser = null;
         }
 
         private void dgUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -173,34 +194,6 @@ namespace App_MotoEmissions
             }
         }
 
-
-        private void ResetForm()
-        {
-            txtFullName.Text = "";
-            txtEmail.Text = "";
-            txtPhone.Text = "";
-            txtPassword.Password = "";
-            txtAddress.Text = "";
-            cbRole.SelectedIndex = -1;
-            cbInspectionCenter.SelectedIndex = -1;
-            selectedUser = null;
-        }
-
-        private void NextPage(object sender, RoutedEventArgs e)
-        {
-            currentPage++;
-            LoadUsers();
-        }
-
-        private void PrevPage(object sender, RoutedEventArgs e)
-        {
-            if (currentPage > 1)
-            {
-                currentPage--;
-                LoadUsers();
-            }
-        }
-
         private void cbRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbRole.SelectedItem is ComboBoxItem selectedRole)
@@ -214,6 +207,40 @@ namespace App_MotoEmissions
         private void ResetForm(object sender, RoutedEventArgs e)
         {
             ResetForm();
+        }
+
+        private void DeleteUser(object sender, RoutedEventArgs e)
+        {
+            if (selectedUser == null)
+            {
+                MessageBox.Show("Vui lòng chọn một tài khoản để xóa!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa tài khoản này?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                UserAccountDAO.DeleteAccount(selectedUser.UserId);
+                MessageBox.Show("Xóa tài khoản thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                LoadUsers();
+                ResetForm();
+            }
+        }
+        private void NextPage(object sender, RoutedEventArgs e)
+        {
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                LoadUsers();
+            }
+        }
+
+        private void PrevPage(object sender, RoutedEventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                LoadUsers();
+            }
         }
     }
 }

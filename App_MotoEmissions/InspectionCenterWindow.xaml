@@ -7,9 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="403*"/>
+            <ColumnDefinition Width="397*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="300" />
         </Grid.RowDefinitions>
 
         <!-- DataGrid hiển thị danh sách InspectionCenter -->
@@ -19,7 +23,7 @@
                   SelectionMode="Single"
                   IsReadOnly="True"
                   SelectionChanged="dgInspectionCenters_SelectionChanged"
-                  Margin="10">
+                  Margin="10,30,10,10" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding CenterId}" Width="50"/>
                 <DataGridTextColumn Header="Tên Trung Tâm" Binding="{Binding Name}" Width="150"/>
@@ -30,7 +34,7 @@
         </DataGrid>
 
         <!-- Form nhập thông tin -->
-        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10,10,10,10" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Tên Trung Tâm:" Width="100"/>
                 <TextBox x:Name="txtName" Width="200"/>

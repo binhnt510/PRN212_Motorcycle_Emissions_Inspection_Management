@@ -1,40 +1,67 @@
 ﻿<UserControl x:Class="App_MotoEmissions.ViolationReportControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Height="450" Width="700">
-    <Grid>
-        <StackPanel Orientation="Vertical" Margin="10">
-            <!-- Form nhập dữ liệu -->
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Height="450" Width="700">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Phần tìm kiếm -->
+            <RowDefinition Height="2*"/>
+            <!-- Phần danh sách -->
+            <RowDefinition Height="Auto"/>
+            <!-- Khoảng cách -->
+            <RowDefinition Height="1.5*"/>
+            <!-- Phần nhập liệu -->
+        </Grid.RowDefinitions>
+
+        <!-- Tìm kiếm vi phạm theo biển số xe -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right" Margin="0,0,0,5">
+            <TextBlock Text="Tìm kiếm:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <TextBox x:Name="txtSearchLicensePlate" Width="150" KeyUp="SearchViolations"/>
+            <Button Content="Tìm" Width="60" Click="SearchViolations"/>
+        </StackPanel>
+
+        <!-- DataGrid hiển thị danh sách vi phạm -->
+        <DataGrid x:Name="dgViolations" AutoGenerateColumns="False" SelectionChanged="dgViolations_SelectionChanged" Height="250"
+                  Grid.Row="1" Margin="0,0,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ViolationId}" Width="50"/>
+                <DataGridTextColumn Header="Biển số xe" Binding="{Binding Vehicle.LicensePlate, TargetNullValue='Không xác định'}" Width="120"/>
+                <DataGridTextColumn Header="Chi tiết" Binding="{Binding ViolationDetails}" Width="200"/>
+                <DataGridTextColumn Header="Tiền phạt" Binding="{Binding FineAmount}" Width="100"/>
+                <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Tiêu đề -->
+        <TextBlock Grid.Row="3" Text="Tạo vi phạm:" FontSize="16" FontWeight="Bold" Margin="5"/>
+
+        <!-- Form nhập dữ liệu -->
+        <StackPanel Grid.Row="3" Orientation="Vertical" Margin="5,30,5,0">
             <StackPanel Orientation="Horizontal" Margin="5">
-                <TextBlock Text="Biển số xe:" Width="auto"/>
-                <TextBox x:Name="txtLicensePlate" Width="100"/>
-                <TextBlock Text="Chi tiết vi phạm:" Width="auto"/>
-                <TextBox x:Name="txtDetails" Width="250"/>
-                <TextBlock Text="Tiền phạt:" Width="80"/>
-                <TextBox x:Name="txtFineAmount" Width="100"/>
+                <TextBlock Text="Biển số xe:" Width="100" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtLicensePlate" Width="350"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Chi tiết vi phạm:" Width="100" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtDetails" Width="350"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Tiền phạt:" Width="100" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtFineAmount" Width="350"/>
             </StackPanel>
 
             <!-- Các nút điều khiển -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                <Button Content="Thêm" Width="80" Click="AddViolation"/>
-                <Button Content="Sửa" Width="80" Click="UpdateViolation"/>
-                <Button Content="Xóa" Width="80" Click="DeleteViolation"/>
-                <Button Content="Tải lại" Width="80" Click="ReloadViolations"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <Button Content="Thêm" Width="80" Click="AddViolation" Margin="5"/>
+                <Button Content="Sửa" Width="80" Click="UpdateViolation" Margin="5"/>
+                <Button Content="Xóa" Width="80" Click="DeleteViolation" Margin="5"/>
+                <Button Content="Tải lại" Width="80" Click="ReloadViolations" Margin="5"/>
+                <Button Content="Gửi vi phạm" Width="100" Margin="5"/>
             </StackPanel>
-
-            <!-- DataGrid hiển thị danh sách vi phạm -->
-            <DataGrid x:Name="dgViolations" AutoGenerateColumns="False" SelectionChanged="dgViolations_SelectionChanged" Height="250">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding ViolationId}" Width="50"/>
-                    <DataGridTextColumn Header="Biển số xe" Binding="{Binding Vehicle.LicensePlate, TargetNullValue='Không xác định'}" Width="120"/>
-                    <DataGridTextColumn Header="Chi tiết" Binding="{Binding ViolationDetails}" Width="200"/>
-                    <DataGridTextColumn Header="Tiền phạt" Binding="{Binding FineAmount}" Width="100"/>
-                    <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="100"/>
-                </DataGrid.Columns>
-            </DataGrid>
         </StackPanel>
     </Grid>
 </UserControl>

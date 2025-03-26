@@ -82,6 +82,16 @@ namespace App_MotoEmissions.DAO
                 }
             }
         }
+        public static List<Violation> GetAllViolations()
+        {
+            using (var context = new PVehicleContext())
+            {
+                return context.Violations
+                              .Include(v => v.Vehicle) // Nạp thông tin xe liên quan
+                              .ToList();
+            }
+        }
+
 
         public static void DeleteViolation(int violationId)
         {

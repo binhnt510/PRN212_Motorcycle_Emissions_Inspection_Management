@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_MotoEmissions"
         mc:Ignorable="d"
-        Title="PoliceCheckWindow" Height="453" Width="800">
+        Title="PoliceCheckWindow" Height="600" Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
