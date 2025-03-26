@@ -208,7 +208,9 @@ public partial class PVehicleContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.ViolationDetails).HasMaxLength(255);
-
+            entity.Property(e => e.PayFine)
+                .HasDefaultValue(false)
+                .HasColumnName("PayFine");
             entity.HasOne(d => d.Police).WithMany(p => p.Violations)
                 .HasForeignKey(d => d.PoliceId)
                 .HasConstraintName("FK__Violation__Polic__5629CD9C");

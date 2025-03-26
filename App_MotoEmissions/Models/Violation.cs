@@ -22,4 +22,5 @@ public partial class Violation
     public virtual UserAccount? Police { get; set; }
 
     public virtual Vehicle? Vehicle { get; set; }
+    public bool? PayFine { get; set; }
 }

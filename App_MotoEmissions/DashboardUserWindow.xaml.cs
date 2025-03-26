@@ -47,6 +47,10 @@ namespace App_MotoEmissions
         {
             MainContent.Content = new InspectionManagementWindow();
         }
+        private void ScreenPay_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new PayFineWindow();
+        }
 
         private void LogoutClick(object sender, RoutedEventArgs e)
         {
