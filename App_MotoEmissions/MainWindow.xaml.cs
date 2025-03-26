@@ -17,9 +17,9 @@ namespace App_MotoEmissions
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class InspectionManager : Window
+    public partial class MainWindow : Window
     {
-        public InspectionManager()
+        public MainWindow()
         {
             InitializeComponent();
         }
@@ -66,8 +66,8 @@ namespace App_MotoEmissions
                     policeWindow.Show();
                     break;
                 case "kiểm định viên":
-                  //  PoliceCheckWindow policeWindow = new PoliceCheckWindow();
-                 //   policeWindow.Show();
+                    InspectionWindow inspectionWindow = new InspectionWindow();
+                    inspectionWindow.Show();
                     break;
                 default:
                     MessageBox.Show("Tài khoản không có quyền truy cập.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);

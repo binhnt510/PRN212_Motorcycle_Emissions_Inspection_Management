@@ -25,7 +25,7 @@ namespace App_MotoEmissions
         {
             InitializeComponent();
             _viewModel = new InspectionViewModel(
-                "Server=VIVOBOOK_PRO_15;uid=sa;password=123;database=P_Vehicle;Encrypt=True;TrustServerCertificate=True;"
+                "Server=LAPTOP-82HD84H0;uid=binhnt;password=123;database=P_Vehicle;Encrypt=True;TrustServerCertificate=True;"
             );
             SetupEventHandlers();
             LoadInspectionList();
