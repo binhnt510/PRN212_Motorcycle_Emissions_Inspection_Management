@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_MotoEmissions"
         mc:Ignorable="d"
-        Title="InspectionWindow" Height="450" Width="800">
+        Title="InspectionWindow" Height="700" Width="1300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -25,10 +25,7 @@
             <!-- Tab 1: Quản lý lịch kiểm định -->
             <TabItem Header="Quản lý lịch kiểm định">
                 <Grid Margin="10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="81*"/>
-                        <ColumnDefinition Width="296*"/>
-                    </Grid.ColumnDefinitions>
+                    
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -81,7 +78,7 @@
                     </DataGrid>
 
                     <!-- Pagination -->
-                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="1" Margin="382,0,0,0">
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <Button Content="Trước" Width="70" Margin="0,0,5,0"/>
                         <TextBlock Text="Trang 1/5" VerticalAlignment="Center" Margin="5,0"/>
                         <Button Content="Sau" Width="70" Margin="5,0,0,0"/>
@@ -126,7 +123,7 @@
                                 <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="120"/>
 
                                 <!-- Nút "Chọn" -->
-                                <DataGridTemplateColumn Header="Chọn">
+                                <DataGridTemplateColumn Header="Chọn" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Content="Select" Click="BtnSelect_Click" />
@@ -135,7 +132,7 @@
                                 </DataGridTemplateColumn>
 
                                 <!-- Nút "Hiển thị thông tin" -->
-                                <DataGridTemplateColumn Header="Thông tin kiểm định">
+                                <DataGridTemplateColumn Header="Thông tin kiểm định" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Content="Hiển thị" Click="btnShowInfo_Click" />
