@@ -4,12 +4,48 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="10">
-            <TextBlock Text="Danh sách người dùng" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" />
+        <StackPanel Orientation="Vertical" Margin="20,20,-93,20">
+            <!-- Tiêu đề -->
+            <TextBlock Text="Danh sách người dùng" FontSize="20" FontWeight="Bold" 
+                       HorizontalAlignment="Center" Margin="0,0,0,10" />
+            <!-- Thanh tìm kiếm -->
+            <Grid Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
 
-            <DataGrid x:Name="dgUsers" AutoGenerateColumns="False" Height="200"
+                <StackPanel Orientation="Vertical" Margin="5,0,0,0" Grid.Column="0" Height="46" VerticalAlignment="Center" HorizontalAlignment="Left" Width="208">
+                    <TextBlock Text="Tìm theo tên"/>
+                    <TextBox x:Name="txtSearchName" Width="150" Height="30" 
+                             TextChanged="SearchUsers" HorizontalAlignment="Left"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="5" Grid.Column="1">
+                    <TextBlock Text="Tìm theo SĐT"/>
+                    <TextBox x:Name="txtSearchPhone" Width="150" Height="30" 
+                             TextChanged="SearchUsers" HorizontalAlignment="Left"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="5" Grid.Column="2">
+                    <TextBlock Text="Tìm theo Email"/>
+                    <TextBox x:Name="txtSearchEmail" Width="150" Height="30" 
+                             TextChanged="SearchUsers" HorizontalAlignment="Left"/>
+                </StackPanel>
+
+                <Button Content="Tìm kiếm" Width="100" Height="30" 
+                        Margin="0,21,0,0" Click="SearchUsers" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                <Button Content="Xóa bộ lọc" Width="100" Height="30" 
+                        Margin="125,21,0,0" Click="ResetSearch" Grid.Column="3" HorizontalAlignment="Left" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+            </Grid>
+            <!-- DataGrid -->
+            <DataGrid x:Name="dgUsers" AutoGenerateColumns="False" Height="241"
                       SelectionMode="Single" SelectionChanged="dgUsers_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding UserId}" Width="50"/>
@@ -20,54 +56,70 @@
                     <DataGridTextColumn Header="Vai trò" Binding="{Binding Role}" Width="120"/>
                     <DataGridTextColumn Header="Cơ sở kiểm định" Binding="{Binding CenterName}" Width="150"/>
                 </DataGrid.Columns>
-
-                
             </DataGrid>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                <Button Content="&lt;&lt;" Click="PrevPage" Width="50" Margin="5"/>
-                <TextBlock Text="{Binding currentPage}" FontSize="16" VerticalAlignment="Center"/>
-                <Button Content=">>" Click="NextPage" Width="50" Margin="5"/>
+
+            <!-- Phân trang -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" Height="33">
+                <Button Content="&lt;&lt; Trước" Click="PrevPage" Width="80" Margin="5"/>
+                <TextBlock Text="{Binding currentPage, Mode=OneWay}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Padding="10"/>
+                <TextBlock Text=" / " FontSize="16" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding totalPages, Mode=OneWay}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Padding="10"/>
+                <Button Content="Tiếp >>" Click="NextPage" Width="80" Margin="5"/>
             </StackPanel>
 
+            <!-- Form nhập thông tin -->
+            <Grid Margin="10" Height="142">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.25*"/>
+                    <ColumnDefinition Width="1.25*"/>
+                </Grid.ColumnDefinitions>
 
-            <StackPanel Orientation="Vertical" Margin="0,10,0,0">
-                <TextBlock Text="Tên"/>
-                <TextBox x:Name="txtFullName" Width="250"/>
+                <UniformGrid Columns="2" Rows="4" HorizontalAlignment="Left" Margin="5" Grid.Column="0">
+                    <TextBlock Text="Tên" Margin="5"/>
+                    <TextBox x:Name="txtFullName" Width="200" Margin="5"/>
 
-                <TextBlock Text="Email"/>
-                <TextBox x:Name="txtEmail" Width="250"/>
+                    <TextBlock Text="Email" Margin="5"/>
+                    <TextBox x:Name="txtEmail" Width="200" Margin="5"/>
 
-                <TextBlock Text="Số điện thoại"/>
-                <TextBox x:Name="txtPhone" Width="250"/>
+                    <TextBlock Text="Số điện thoại" Margin="5"/>
+                    <TextBox x:Name="txtPhone" Width="200" Margin="5"/>
 
-                <TextBlock Text="Mật khẩu"/>
-                <PasswordBox x:Name="txtPassword" Width="250"/>
+                    <TextBlock Text="Mật khẩu" Margin="5"/>
+                    <PasswordBox x:Name="txtPassword" Width="200" Margin="5"/>
+                </UniformGrid>
 
-                <TextBlock Text="Địa chỉ"/>
-                <TextBox x:Name="txtAddress" Width="250"/>
+                <UniformGrid Columns="2" Rows="3" HorizontalAlignment="Left" Margin="5" Grid.Column="1">
+                    <TextBlock Text="Địa chỉ" Margin="5"/>
+                    <TextBox x:Name="txtAddress" Width="200" Margin="0,5,0,5"/>
 
-                <TextBlock Text="Vai trò"/>
-                <ComboBox x:Name="cbRole" Width="250" SelectionChanged="cbRole_SelectionChanged">
-                    <ComboBoxItem Content="Chủ phương tiện"/>
-                    <ComboBoxItem Content="Cảnh sát giao thông"/>
-                    <ComboBoxItem Content="Quản trị viên"/>
-                    <ComboBoxItem Content="Kiểm định viên"/>
-                </ComboBox>
+                    <TextBlock Text="Vai trò" Margin="5"/>
+                    <ComboBox Margin="0,5,0,5" x:Name="cbRole" Width="200" SelectionChanged="cbRole_SelectionChanged">
+                        <ComboBoxItem Content="Chủ phương tiện"/>
+                        <ComboBoxItem Content="Cảnh sát giao thông"/>
+                        <ComboBoxItem Content="Quản trị viên"/>
+                        <ComboBoxItem Content="Kiểm định viên"/>
+                    </ComboBox>
 
-                <TextBlock Text="Cơ sở kiểm định" x:Name="lblInspectionCenter" Visibility="Collapsed"/>
-                <ComboBox x:Name="cbInspectionCenter"
-                               SelectedValuePath="CenterId"
-                               DisplayMemberPath="Name"
-                               ItemsSource="{Binding InspectionCenters}" Width="250" />
-
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <Button Content="Thêm" Click="AddUser" Width="80" Margin="5"/>
-                <Button Content="Sửa" Click="UpdateUser" Width="80" Margin="5"/>
-                <Button Content="Xóa" Click="DeleteUser" Width="80" Margin="5"/>
-                <Button Content="Reset" Click="ResetForm" Width="80" Margin="5"/>
-            </StackPanel>
+                    <TextBlock Margin="5" Text="Cơ sở kiểm định" x:Name="lblInspectionCenter"/>
+                    <ComboBox  Margin="0,5,0,5" x:Name="cbInspectionCenter"
+                              SelectedValuePath="CenterId"
+                              DisplayMemberPath="Name"
+                              ItemsSource="{Binding InspectionCenters}" Width="200"/>
+                </UniformGrid>
+            </Grid>
         </StackPanel>
+
+        <!-- Nút thao tác -->
+        <Grid Margin="0,532,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="800">
+
+
+            <StackPanel Margin="30" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0">
+                <Button Content="Sửa" Click="UpdateUser" Width="80" Height="38"/>
+                <Button Content="Thêm" Click="AddUser" Width="80" Margin="5" Height="38"/>
+
+                <Button Content="Xóa" Click="DeleteUser" Width="80" Margin="5" Height="38"/>
+                <Button Content="Reset" Click="ResetForm" Width="80" Margin="5" Height="38"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

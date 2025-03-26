@@ -154,5 +154,28 @@ namespace App_MotoEmissions.DAO
                 }
             }
         }
+
+        public int GetTotalPages(int pageSize)
+        {
+            using (var context = new PVehicleContext())
+            {
+                int totalRecords = context.UserAccounts.Count();
+                return (int)Math.Ceiling((double)totalRecords / pageSize);
+            }
+        }
+
+        public static List<UserAccount> SearchAccounts2(string keyword)
+        {
+            using (PVehicleContext db = new PVehicleContext())
+            {
+                return db.UserAccounts
+                         .Where(u => u.FullName.Contains(keyword) ||
+                                     u.Email.Contains(keyword) ||
+                                     u.PhoneNumber.Contains(keyword))
+                         .ToList();
+            }
+        }
+
+
     }
 }

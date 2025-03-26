@@ -31,7 +31,7 @@ namespace App_MotoEmissions
         public ViolationReportControl(int policeId)
         {
             InitializeComponent();
-            LoadViolations();
+            LoadViolations2();
             dgViolations.ItemsSource = Violations;
             this.policeId = policeId;
         }
@@ -43,7 +43,37 @@ namespace App_MotoEmissions
             Violations = new ObservableCollection<Violation>(violations);
             dgViolations.ItemsSource = Violations; // Cập nhật lại DataGrid
         }
+        // Load danh sách vi phạm từ database
+        private void LoadViolations2()
+        {
+            var violations = ViolationDAO.GetAllViolations(); // Lấy toàn bộ danh sách
+            Violations.Clear(); // Xóa dữ liệu cũ
+            foreach (var violation in violations)
+            {
+                Violations.Add(violation);
+            }
+            dgViolations.ItemsSource = Violations; // Cập nhật DataGrid
+        }
 
+        // Tìm kiếm vi phạm theo biển số xe
+        private void SearchViolations(object sender, RoutedEventArgs e)
+        {
+            string searchText = txtSearchLicensePlate.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                // Nếu ô tìm kiếm trống, hiển thị lại tất cả vi phạm
+                LoadViolations2();
+                return;
+            }
+
+            // Lọc danh sách vi phạm theo biển số xe
+            var filteredViolations = Violations
+                .Where(v => v.Vehicle?.LicensePlate != null && v.Vehicle.LicensePlate.ToLower().Contains(searchText))
+                .ToList();
+
+            dgViolations.ItemsSource = filteredViolations;
+        }
 
         // Thêm vi phạm mới
         private void AddViolation(object sender, RoutedEventArgs e)
@@ -65,7 +95,7 @@ namespace App_MotoEmissions
             };
 
             ViolationDAO.AddViolationReport(violation);
-            LoadViolations();
+            LoadViolations2();
             ClearFields();
 
             MessageBox.Show("Thêm vi phạm thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -104,7 +134,7 @@ namespace App_MotoEmissions
            
 
             ViolationDAO.UpdateViolation(selectedViolation);
-            LoadViolations();
+            LoadViolations2();
             ClearFields();
         }
 
@@ -124,7 +154,7 @@ namespace App_MotoEmissions
             }
 
             ViolationDAO.DeleteViolation(selectedViolation.ViolationId);
-            LoadViolations();
+            LoadViolations2();
             ClearFields();
         }
 
@@ -132,7 +162,7 @@ namespace App_MotoEmissions
         // Tải lại danh sách vi phạm
         private void ReloadViolations(object sender, RoutedEventArgs e)
         {
-            LoadViolations();
+            LoadViolations2();
             ClearFields();
         }
 
@@ -144,5 +174,6 @@ namespace App_MotoEmissions
             txtFineAmount.Text = "";
             selectedViolation = null;
         }
+
     }
 }
