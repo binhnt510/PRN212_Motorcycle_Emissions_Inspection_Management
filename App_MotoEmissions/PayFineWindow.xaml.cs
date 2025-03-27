@@ -50,6 +50,7 @@ namespace App_MotoEmissions
                     var violation = context.Violations.FirstOrDefault(v => v.ViolationId == violationID);
                     if (violation != null)
                     {
+                        violation.Status = "Đã xử lý";
                         violation.PayFine = true;
                         context.SaveChanges();
                     }

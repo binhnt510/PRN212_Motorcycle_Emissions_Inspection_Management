@@ -29,7 +29,7 @@ AlternatingRowBackground="#F5F5F5">
                         <DataGridTextColumn Header="Biển số xe" Binding="{Binding Vehicle.LicensePlate}" Width="180" FontSize="15"/>
                         <DataGridTextColumn Header="Ngày kiểm định" Binding="{Binding ScheduledDate}" Width="200" FontSize="15"/>
                         <DataGridTextColumn Header="Cơ sở kiểm định" Binding="{Binding Center.Name}" Width="210" FontSize="15"/>
-                        <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="*" FontSize="15" >
+                        <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="200" FontSize="15" >
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Style.Triggers>
@@ -41,7 +41,7 @@ AlternatingRowBackground="#F5F5F5">
                                         </DataTrigger>
 
                                         <!-- Triggers để thay đổi màu chữ khi Status là giá trị khác (đã xử lý) -->
-                                        <DataTrigger Binding="{Binding Status}" Value="Đã xác nhận">
+                                        <DataTrigger Binding="{Binding Status}" Value="Đã hoàn thành">
                                             <DataTrigger.Setters>
                                                 <Setter Property="Foreground" Value="Green"/>
                                             </DataTrigger.Setters>
@@ -50,6 +50,15 @@ AlternatingRowBackground="#F5F5F5">
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
+                        <DataGridTemplateColumn Header="Chi tiết" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Xem" 
+                        Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityConverter}}"
+                        Click="btnViewEmissionDetails_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
