@@ -13,53 +13,82 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="300" />
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="250" />
         </Grid.RowDefinitions>
+        <Label Content="Quản Lý Trung Tâm Kiểm Định" 
+       FontSize="30" 
+       FontWeight="Bold" 
+       Margin="15" 
+       Width="500" 
+       Grid.ColumnSpan="2" 
+       HorizontalAlignment="Left"/>
 
-        <!-- DataGrid hiển thị danh sách InspectionCenter -->
         <DataGrid x:Name="dgInspectionCenters"
                   ItemsSource="{Binding InspectionCenters}" 
                   AutoGenerateColumns="False"
                   SelectionMode="Single"
                   IsReadOnly="True"
                   SelectionChanged="dgInspectionCenters_SelectionChanged"
-                  Margin="10,30,10,10" Grid.ColumnSpan="2">
+                  Margin="10,20,10,0" 
+                  Grid.ColumnSpan="2" Height="220">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding CenterId}" Width="50"/>
-                <DataGridTextColumn Header="Tên Trung Tâm" Binding="{Binding Name}" Width="150"/>
-                <DataGridTextColumn Header="Địa Chỉ" Binding="{Binding Address}" Width="200"/>
-                <DataGridTextColumn Header="Số Điện Thoại" Binding="{Binding PhoneNumber}" Width="150"/>
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding CenterId}" Width="*"/>
+                <DataGridTextColumn Header="Tên Trung Tâm" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Địa Chỉ" Binding="{Binding Address}" Width="*"/>
+                <DataGridTextColumn Header="Số Điện Thoại" Binding="{Binding PhoneNumber}" Width="*"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <!-- Form nhập thông tin -->
-        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10,10,10,10" Grid.ColumnSpan="2">
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5,-70,15,5">
+            <Button Content="⏮" Click="btnFirstPage_Click" Width="50" Height="30" Background="#0078D7" Foreground="White"/>
+            <Button Content="◀" Click="btnPreviousPage_Click" Width="50" Height="30" Background="#0078D7" Foreground="White"/>
+            <Label x:Name="lblPageInfo" Content="Trang 1/1" Margin="10"/>
+            <Button Content="▶" Click="btnNextPage_Click" Width="50" Height="30" Background="#0078D7" Foreground="White"/>
+            <Button Content="⏭" Click="btnLastPage_Click" Width="50" Height="30" Background="#0078D7" Foreground="White"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Vertical" Margin="10,-30,10,10" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Tên Trung Tâm:" Width="100"/>
                 <TextBox x:Name="txtName" Width="200"/>
             </StackPanel>
-
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Địa Chỉ:" Width="100"/>
                 <TextBox x:Name="txtAddress" Width="200"/>
             </StackPanel>
-
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Số Điện Thoại:" Width="100"/>
                 <TextBox x:Name="txtPhoneNumber" Width="200"/>
             </StackPanel>
-
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Email:" Width="100"/>
                 <TextBox x:Name="txtEmail" Width="200"/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Left">
+                <Button Content="Thêm" Click="btnAdd_Click" Width="80" Height="30" Background="#0078D7" Foreground="White" Margin="5"/>
+                <Button Content="Sửa" Click="btnUpdate_Click" Width="80" Height="30" Background="#0078D7" Foreground="White" Margin="5"/>
+                <Button Content="Xóa" Click="btnDelete_Click" Width="80" Height="30" Background="#0078D7" Foreground="White" Margin="5"/>
+                <Button Content="Reset" Click="btnReset_Click" Width="80" Height="30" Background="#0078D7" Foreground="White" Margin="5"/>
+            </StackPanel>
+        </StackPanel>
 
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="10,-30,10,10">
+            <Label Content="Tìm kiếm trung tâm kiểm định" FontWeight="Bold" FontSize="14" Margin="5"/>
             <StackPanel Orientation="Horizontal" Margin="5">
-                <Button Content="Thêm" Click="btnAdd_Click" Width="80" Margin="5"/>
-                <Button Content="Sửa" Click="btnUpdate_Click" Width="80" Margin="5"/>
-                <Button Content="Xóa" Click="btnDelete_Click" Width="80" Margin="5"/>
-                <Button Content="Reset" Click="btnReset_Click" Width="80" Margin="5"/>
+                <Label Content="Từ khóa:" Width="80"/>
+                <TextBox x:Name="txtSearch" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Content="Tìm theo:" Width="80"/>
+                <ComboBox x:Name="cbSearchType" Width="150">
+                    <ComboBoxItem Content="Tên Trung Tâm"/>
+                    <ComboBoxItem Content="Địa Chỉ"/>
+                    <ComboBoxItem Content="Số Điện Thoại"/>
+                    <ComboBoxItem Content="Email"/>
+                </ComboBox>
+                <Button Content="Tìm kiếm" Click="btnSearch_Click" Width="100" Height="30" Background="#0078D7" Foreground="White" Margin="10,0,0,0"/>
             </StackPanel>
         </StackPanel>
     </Grid>
