@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_MotoEmissions"
         mc:Ignorable="d"
+
         Title="InspectionWindow" Height="700" Width="1400">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -34,6 +36,7 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="HỆ THỐNG QUẢN LÝ KIỂM ĐỊNH KHÍ THẢI" 
                FontSize="22" FontWeight="Bold" Foreground="White"/>
+
                 </StackPanel>
             </Border>
 
@@ -42,6 +45,7 @@
                 <!-- Tab 1: Quản lý lịch kiểm định -->
                 <TabItem Header="Quản lý lịch kiểm định">
                     <Grid Margin="10">
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="167*"/>
                             <ColumnDefinition Width="80*"/>
@@ -82,14 +86,18 @@
                                 <DataGridTextColumn Header="Thời gian hẹn" Binding="{Binding ScheduledDate}" Width="150"/>
                                 <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="120"/>
 
+
                                 <DataGridTemplateColumn Header="Thông tin kiểm định">
+
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Content="Hiển thị" Click="btnShowInfo_Click" Margin="5"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
+
                                 <DataGridTemplateColumn Header="Gửi thông tin">
+
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Content="gửi" Click="btnSend_Click" Margin="5"/>

@@ -20,24 +20,30 @@
         <!-- Tìm kiếm vi phạm theo biển số xe -->
         <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right" Margin="0,0,0,5">
             <TextBlock Text="Tìm kiếm:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-            <TextBox x:Name="txtSearchLicensePlate" Width="150" KeyUp="SearchViolations"/>
-            <Button Content="Tìm" Width="60" Click="SearchViolations"/>
+            <TextBox x:Name="txtSearchLicensePlate" Width="150" KeyUp="SearchViolations" Margin="5"/>
+            <Button Content="Tìm" Width="60" Click="SearchViolations" Margin="5" Background="#0078D7" Foreground="White"/>
         </StackPanel>
 
         <!-- DataGrid hiển thị danh sách vi phạm -->
-        <DataGrid x:Name="dgViolations" AutoGenerateColumns="False" SelectionChanged="dgViolations_SelectionChanged" Height="250"
+        <DataGrid x:Name="dgViolations" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dgViolations_SelectionChanged" Height="250"
                   Grid.Row="1" Margin="0,0,0,10">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding ViolationId}" Width="50"/>
-                <DataGridTextColumn Header="Biển số xe" Binding="{Binding Vehicle.LicensePlate, TargetNullValue='Không xác định'}" Width="120"/>
-                <DataGridTextColumn Header="Chi tiết" Binding="{Binding ViolationDetails}" Width="200"/>
-                <DataGridTextColumn Header="Tiền phạt" Binding="{Binding FineAmount}" Width="100"/>
-                <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="100"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding ViolationId}" Width="*"/>
+                <DataGridTextColumn Header="Biển số xe" Binding="{Binding Vehicle.LicensePlate, TargetNullValue='Không xác định'}" Width="*"/>
+                <DataGridTextColumn Header="Chi tiết" Binding="{Binding ViolationDetails}" Width="*"/>
+                <DataGridTextColumn Header="Tiền phạt" Binding="{Binding FineAmount}" Width="*"/>
+                <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="52,1,0,10" Width="130">
+            <Button x:Name="btnPrevPage" Content="&lt; Trước" Width="46" Click="PrevPage" Margin="5" />
+            <TextBlock Text="{Binding ElementName=currentPage, Path=Text}" Margin="10"/>
+            <Button x:Name="btnNextPage" Content="Sau &gt;" Click="NextPage" Width="46" Margin="5"   />
+        </StackPanel>
+
         <!-- Tiêu đề -->
-        <TextBlock Grid.Row="3" Text="Tạo vi phạm:" FontSize="16" FontWeight="Bold" Margin="5"/>
+        <TextBlock Grid.Row="3" Text="Tạo vi phạm:" FontSize="16" FontWeight="Bold" Margin="5,5,5,5"/>
 
         <!-- Form nhập dữ liệu -->
         <StackPanel Grid.Row="3" Orientation="Vertical" Margin="5,30,5,0">
@@ -53,15 +59,14 @@
                 <TextBlock Text="Tiền phạt:" Width="100" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtFineAmount" Width="350"/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" Width="470">
+                <Button Content="Thêm" Width="80" Click="AddViolation" Margin="5" Background="#0078D7" Foreground="White"/>
+                <Button Content="Sửa" Width="80" Click="UpdateViolation" Margin="5" Background="#0078D7" Foreground="White"/>
+                <Button Content="Xóa" Width="80" Click="DeleteViolation" Margin="5" Background="#0078D7" Foreground="White" />
+                <Button Content="Tải lại" Width="80" Click="ReloadViolations" Margin="5" Background="#0078D7" Foreground="White"/>
+            </StackPanel>
 
             <!-- Các nút điều khiển -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                <Button Content="Thêm" Width="80" Click="AddViolation" Margin="5"/>
-                <Button Content="Sửa" Width="80" Click="UpdateViolation" Margin="5"/>
-                <Button Content="Xóa" Width="80" Click="DeleteViolation" Margin="5"/>
-                <Button Content="Tải lại" Width="80" Click="ReloadViolations" Margin="5"/>
-                <Button Content="Gửi vi phạm" Width="100" Margin="5"/>
-            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

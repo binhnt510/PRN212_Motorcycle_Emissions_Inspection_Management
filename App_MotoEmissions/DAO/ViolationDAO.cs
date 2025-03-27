@@ -10,6 +10,25 @@ namespace App_MotoEmissions.DAO
 {
     class ViolationDAO
     {
+        private const int PageSize = 9; // Số vi phạm hiển thị mỗi trang
+
+        public static int GetTotalPages()
+        {
+            PVehicleContext context = new PVehicleContext();
+            int totalRecords = context.Violations.Count();
+            return (int)Math.Ceiling((double)totalRecords / PageSize);
+        }
+
+        public static List<Violation> GetViolationsByPage(int pageNumber)
+        {
+            PVehicleContext context = new PVehicleContext();
+            return context.Violations
+                          .Include(x => x.Vehicle)
+                          .OrderByDescending(v => v.ViolationDate)
+                          .Skip((pageNumber - 1) * PageSize)
+                          .Take(PageSize)
+                          .ToList();
+        }
         public static List<Violation> GetViolations(string email)
         {
             PVehicleContext db = new PVehicleContext();
@@ -37,7 +56,6 @@ namespace App_MotoEmissions.DAO
                     .ToList();
             }
         }
-
 
         public static List<Violation> GetViolationsByVehicle(int vehicleId, int pageNumber, int pageSize)
         {

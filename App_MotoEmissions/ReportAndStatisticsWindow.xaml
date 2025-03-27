@@ -8,9 +8,12 @@
              d:DesignHeight="500" d:DesignWidth="900">
 
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="10">
+        <TextBlock Text="Thống Kê Kiểm Định Khí Thải" FontSize="20" FontWeight="Bold" 
+           HorizontalAlignment="Center" Margin="0,0,0,10" />
+        
+        <StackPanel Orientation="Vertical" Margin="10,43,10,10">
             <!-- Bộ lọc -->
-            <StackPanel Orientation="Horizontal" Margin="5">
+            <StackPanel Orientation="Horizontal" Margin="5" Height="54">
                 <TextBlock Text="Từ ngày:" VerticalAlignment="Center" Margin="5"/>
                 <DatePicker x:Name="dpStartDate" Width="120" />
 
@@ -20,7 +23,8 @@
                 <TextBlock Text="Khu vực:" VerticalAlignment="Center" Margin="5"/>
                 <ComboBox x:Name="cbAreaFilter" Width="150"/>
 
-                <Button Content="Thống kê" Click="btnGenerateReport_Click" Width="100" Margin="10"/>
+                <Button Content="Thống kê" Click="btnGenerateReport_Click" Width="100" Margin="10"
+                        Height="38" Background="#0078D7" Foreground="White"/>
             </StackPanel>
 
             <!-- Bảng dữ liệu -->

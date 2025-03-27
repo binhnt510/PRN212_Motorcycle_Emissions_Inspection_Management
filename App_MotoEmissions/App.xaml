@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:App_MotoEmissions"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <local:StatusToVisibilityConverter x:Key="StatusToVisibilityConverter"/>
     </Application.Resources>
 </Application>

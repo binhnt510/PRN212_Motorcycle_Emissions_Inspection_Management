@@ -21,6 +21,7 @@
         /// </summary>
         public partial class InspectionWindow : Window
         {
+
             private InspectionViewModel _viewModel;
             private System.Collections.Generic.List<InspectionViewModel.InspectionData> _allInspections;
 

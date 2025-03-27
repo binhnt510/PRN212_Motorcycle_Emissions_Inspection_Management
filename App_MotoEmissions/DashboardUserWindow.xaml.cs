@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using App_MotoEmissions;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -45,6 +46,10 @@ namespace App_MotoEmissions
         private void ScreenInspecClick(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new InspectionManagementWindow();
+        }
+        private void ScreenPay_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new PayFineWindow();
         }
 
         private void LogoutClick(object sender, RoutedEventArgs e)

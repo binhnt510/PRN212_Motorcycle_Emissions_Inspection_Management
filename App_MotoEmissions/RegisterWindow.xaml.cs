@@ -44,6 +44,16 @@ namespace App_MotoEmissions
                   return;
                 
             }
+            if (!(phone.Length==10) || !(phone[0]=='0'))
+            {
+                MessageBox.Show("Số điện thoại phải là 10 số và bắt đầu bằng số 0.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (!(email.Contains(".")) || !(email.Contains("@")))
+            {
+                MessageBox.Show("Email không đúng định dạng.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (UserAccountDAO.CheckEmailExist(email)){
                 MessageBox.Show("Email đã tồn tại.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

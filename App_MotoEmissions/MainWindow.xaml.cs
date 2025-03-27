@@ -68,6 +68,7 @@ namespace App_MotoEmissions
                 case "kiểm định viên":
                     InspectionWindow inswindow = new InspectionWindow();
                     inswindow.Show();
+
                     break;
                 default:
                     MessageBox.Show("Tài khoản không có quyền truy cập.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);

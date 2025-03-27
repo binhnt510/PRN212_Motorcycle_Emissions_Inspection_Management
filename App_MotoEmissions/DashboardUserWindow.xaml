@@ -20,6 +20,7 @@
 
             <TextBlock Name="txtName" HorizontalAlignment="Center" Margin="10,10,10,20" Foreground="White" FontWeight="Black" FontSize="20"/>
             <Button Content="Thông báo &amp; Vi phạm" Click="ScreenNoti_Click" Foreground="White" Background="#FF0F263B" Height="50" BorderThickness="0,0,0,0" FontSize="15" Margin="0,0,0,10"/>
+            <Button Content="Nộp phạt" Click="ScreenPay_Click" Foreground="White" Background="#FF0F263B" Height="50" BorderThickness="0,0,0,0" FontSize="15" Margin="0,0,0,10"/>
             <Button Content="Quản lý phương tiện" Click="ScreenVehi_Click" Foreground="White" Background="#FF0F263B" Height="50" BorderThickness="0" FontSize="15" Margin="0,10,0,10"/>
             <Button Content="Kiểm định khí thải" Click="ScreenInspecClick" Foreground="White" Background="#FF0F263B" Height="50" BorderThickness="0" FontSize="15" Margin="0,10,0,10"/>
             <Button Content="Đăng xuất" Click="LogoutClick" Foreground="White" Background="#FF0F263B" Height="50" BorderThickness="0" FontSize="15" Margin="0,10,0,10"/>

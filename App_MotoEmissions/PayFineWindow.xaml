@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="App_MotoEmissions.PayFineWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:App_MotoEmissions"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1000">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!-- Danh sách vi phạm -->
+            <RowDefinition Height="60"/>
+            <!-- Nút thanh toán -->
+        </Grid.RowDefinitions>
+
+        <!-- Danh sách vi phạm -->
+        <GroupBox Grid.Row="0" >
+            <GroupBox.Header>
+                <TextBlock Text="💸Nộp phat vi phạm" FontSize="20" FontWeight="Bold"/>
+            </GroupBox.Header>
+            <DataGrid x:Name="dataGridViolations" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" VerticalGridLinesBrush="#DDDDDD"
+AlternatingRowBackground="#F5F5F5">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ViolationId}" Width="70" FontSize="15"/>
+                    <DataGridTextColumn Header="Ngày vi phạm" Binding="{Binding ViolationDate}" Width="230" FontSize="15"/>
+                    <DataGridTextColumn Header="Biển số xe" Binding="{Binding Vehicle.LicensePlate}" Width="190" FontSize="15"/>
+                    <DataGridTextColumn Header="Số tiền phạt" Binding="{Binding FineAmount}" Width="170" FontSize="15"/>
+                    <DataGridCheckBoxColumn Header="Đã thanh toán" Binding="{Binding PayFine}" IsReadOnly="True" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <!-- Nút thanh toán -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="💰 Thanh toán" Width="150" Click="PayFine_Click" FontSize="15"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

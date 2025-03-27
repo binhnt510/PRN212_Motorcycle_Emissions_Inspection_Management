@@ -158,5 +158,16 @@ namespace App_MotoEmissions
                 txtFuelType.Text = vehicle.FuelType;
             }
         }
+        private void btnViewEmissionDetails_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var inspection = button.DataContext as Inspection;
+
+            if (inspection != null)
+            {
+                var emissionDetailsWindow = new EmissionDetailsWindow(inspection.Vehicle.LicensePlate);
+                emissionDetailsWindow.ShowDialog();
+            }
+        }
     }
 }
