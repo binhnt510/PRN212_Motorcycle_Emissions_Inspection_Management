@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="800">
+             d:DesignHeight="650" d:DesignWidth="1000">
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="20,20,-93,20">
+        <StackPanel Orientation="Vertical" Margin="20,20,20,20">
             <!-- Tiêu đề -->
             <TextBlock Text="Danh sách người dùng" FontSize="20" FontWeight="Bold" 
                        HorizontalAlignment="Center" Margin="0,0,0,10" />
@@ -39,32 +39,38 @@
                 </StackPanel>
 
                 <Button Content="Tìm kiếm" Width="100" Height="30" 
-                        Margin="0,21,0,0" Click="SearchUsers" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        Margin="0,21,0,0" Click="SearchUsers" Grid.Column="3" 
+        HorizontalAlignment="Left" VerticalAlignment="Top" 
+        Background="#0078D7" Foreground="White"/>
 
                 <Button Content="Xóa bộ lọc" Width="100" Height="30" 
-                        Margin="125,21,0,0" Click="ResetSearch" Grid.Column="3" HorizontalAlignment="Left" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+        Margin="125,21,0,0" Click="ResetSearch" Grid.Column="3" 
+        HorizontalAlignment="Left" Grid.ColumnSpan="2" 
+        VerticalAlignment="Top" Background="#0078D7" Foreground="White"/>
             </Grid>
             <!-- DataGrid -->
             <DataGrid x:Name="dgUsers" AutoGenerateColumns="False" Height="241"
-                      SelectionMode="Single" SelectionChanged="dgUsers_SelectionChanged">
+                      SelectionMode="Single" IsReadOnly="True" SelectionChanged="dgUsers_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding UserId}" Width="50"/>
-                    <DataGridTextColumn Header="Tên" Binding="{Binding FullName}" Width="150"/>
-                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150"/>
-                    <DataGridTextColumn Header="SĐT" Binding="{Binding PhoneNumber}" Width="100"/>
-                    <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="150"/>
-                    <DataGridTextColumn Header="Vai trò" Binding="{Binding Role}" Width="120"/>
-                    <DataGridTextColumn Header="Cơ sở kiểm định" Binding="{Binding CenterName}" Width="150"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding UserId}" Width="*"/>
+                    <DataGridTextColumn Header="Tên" Binding="{Binding FullName}" Width="*"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                    <DataGridTextColumn Header="SĐT" Binding="{Binding PhoneNumber}" Width="*"/>
+                    <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="*"/>
+                    <DataGridTextColumn Header="Vai trò" Binding="{Binding Role}" Width="*"/>
+                    <DataGridTextColumn Header="Cơ sở kiểm định" Binding="{Binding CenterName}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 
             <!-- Phân trang -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" Height="33">
-                <Button Content="&lt;&lt; Trước" Click="PrevPage" Width="80" Margin="5"/>
+                <Button Content="&lt;&lt; Trước" Click="PrevPage" Width="80" Margin="5"
+        Background="#0078D7" Foreground="White"/>
                 <TextBlock Text="{Binding currentPage, Mode=OneWay}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Padding="10"/>
                 <TextBlock Text=" / " FontSize="16" VerticalAlignment="Center"/>
                 <TextBlock Text="{Binding totalPages, Mode=OneWay}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Padding="10"/>
-                <Button Content="Tiếp >>" Click="NextPage" Width="80" Margin="5"/>
+                <Button Content="Tiếp >>" Click="NextPage" Width="80" Margin="5"
+        Background="#0078D7" Foreground="White"/>
             </StackPanel>
 
             <!-- Form nhập thông tin -->
@@ -113,12 +119,18 @@
         <Grid Margin="0,532,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="800">
 
 
-            <StackPanel Margin="30" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0">
-                <Button Content="Sửa" Click="UpdateUser" Width="80" Height="38"/>
-                <Button Content="Thêm" Click="AddUser" Width="80" Margin="5" Height="38"/>
+            <StackPanel Margin="37,41,0,19" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" Width="414">
+                <Button Content="Sửa" Click="UpdateUser" Width="80" Margin="5" Height="38"
+        Background="#0078D7" Foreground="White"/>
 
-                <Button Content="Xóa" Click="DeleteUser" Width="80" Margin="5" Height="38"/>
-                <Button Content="Reset" Click="ResetForm" Width="80" Margin="5" Height="38"/>
+                <Button Content="Thêm" Click="AddUser" Width="80" Margin="5" Height="38"
+        Background="#0078D7" Foreground="White"/>
+
+                <Button Content="Xóa" Click="DeleteUser" Width="80" Margin="5" Height="38"
+        Background="#0078D7" Foreground="White"/>
+
+                <Button Content="Reset" Click="ResetForm" Width="80" Margin="5" Height="38"
+        Background="#0078D7" Foreground="White"/>
             </StackPanel>
         </Grid>
     </Grid>
