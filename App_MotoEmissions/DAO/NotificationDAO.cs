@@ -20,5 +20,20 @@ namespace App_MotoEmissions.DAO
 
 
         }
+        public static void CreateNotification(UserAccount user, string message)
+        {
+            using (var context = new PVehicleContext())
+            {
+                var notification = new Notification
+                {
+                    UserId = user.UserId,
+                    Message = message,
+                    SentDate = DateTime.Now
+                };
+
+                context.Notifications.Add(notification);
+                context.SaveChanges();
+            }
+        }
     }
 }

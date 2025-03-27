@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Data.SqlClient;
 using static Azure.Core.HttpHeader;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using App_MotoEmissions.DAO;
 
 public class InspectionViewModel
 {
@@ -24,6 +25,14 @@ public class InspectionViewModel
     {
         _connectionString = connectionString;
     }
+    public UserAccount GetUserByVehicle(int vehicleId)
+    {
+        using (var db = new PVehicleContext()) // Đảm bảo dùng đúng DbContext của bạn
+        {
+            return db.UserAccounts
+                     .FirstOrDefault(u => db.Vehicles.Any(v => v.VehicleId == vehicleId && v.OwnerId == u.UserId));
+        }
+    }
 
     // Phương thức cập nhật kết quả kiểm định
     public bool SubmitInspectionResult(int inspectionId, double co, double hc, double nox, string result, string notes)
@@ -37,6 +46,35 @@ public class InspectionViewModel
                 {
                     try
                     {
+                        // Lấy thông tin xe
+                        string vehicleQuery = @"
+                        SELECT v.OwnerID, v.LicensePlate, u.Email 
+                        FROM Inspection i
+                        JOIN Vehicle v ON i.VehicleID = v.VehicleID
+                        JOIN UserAccount u ON v.OwnerID = u.UserID
+                        WHERE i.InspectionID = @InspectionID";
+
+                        UserAccount owner = null;
+                        string licensePlate = "";
+
+                        using (SqlCommand vehicleCmd = new SqlCommand(vehicleQuery, connection, transaction))
+                        {
+                            vehicleCmd.Parameters.AddWithValue("@InspectionID", inspectionId);
+
+                            using (SqlDataReader reader = vehicleCmd.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    owner = new UserAccount
+                                    {
+                                        UserId = reader.GetInt32(reader.GetOrdinal("OwnerID")),
+                                        Email = reader.GetString(reader.GetOrdinal("Email"))
+                                    };
+                                    licensePlate = reader.GetString(reader.GetOrdinal("LicensePlate"));
+                                }
+                            }
+                        }
+
                         // Cập nhật trạng thái kiểm định
                         string updateQuery = "UPDATE Inspection SET Status = 'Completed' WHERE InspectionID = @InspectionID;";
                         using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection, transaction))
@@ -47,8 +85,8 @@ public class InspectionViewModel
 
                         // Thêm kết quả kiểm định vào bảng EmissionTest
                         string insertQuery = @"
-                        INSERT INTO EmissionTest (InspectionID, CO_Level, HC_Level, NOx_Level, Result, TestDate) 
-                        VALUES (@InspectionID, @CO_Level, @HC_Level, @NOx_Level, @Result, SYSDATETIME());";
+                    INSERT INTO EmissionTest (InspectionID, CO_Level, HC_Level, NOx_Level, Result, TestDate) 
+                    VALUES (@InspectionID, @CO_Level, @HC_Level, @NOx_Level, @Result, SYSDATETIME());";
 
                         using (SqlCommand insertCommand = new SqlCommand(insertQuery, connection, transaction))
                         {
@@ -59,6 +97,17 @@ public class InspectionViewModel
                             insertCommand.Parameters.AddWithValue("@Result", result);
 
                             insertCommand.ExecuteNonQuery();
+                        }
+
+                        // Tạo thông báo cho chủ xe
+                        if (owner != null)
+                        {
+                            string notificationMessage = $"Kết quả kiểm định xe {licensePlate}: {result}. " +
+                                $"Chi tiết: CO: {co}%, HC: {hc} ppm, NOx: {nox} ppm. " +
+                                $"Ghi chú: {notes}";
+
+                            // Sử dụng NotificationDAO để tạo thông báo
+                            NotificationDAO.CreateNotification(owner, notificationMessage);
                         }
 
                         transaction.Commit();
