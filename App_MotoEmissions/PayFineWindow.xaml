@@ -8,7 +8,7 @@
              d:DesignHeight="700" d:DesignWidth="1000">
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="570" />
             <!-- Danh sách vi phạm -->
             <RowDefinition Height="60"/>
             <!-- Nút thanh toán -->
@@ -32,8 +32,8 @@ AlternatingRowBackground="#F5F5F5">
         </GroupBox>
 
         <!-- Nút thanh toán -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button Content="💰 Thanh toán" Width="150" Click="PayFine_Click" FontSize="15"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,-5">
+            <Button Content="💰 Thanh toán" Width="150" Click="PayFine_Click" FontSize="15" />
         </StackPanel>
     </Grid>
 </UserControl>
