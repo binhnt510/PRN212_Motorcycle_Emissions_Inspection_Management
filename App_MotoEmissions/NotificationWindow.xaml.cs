@@ -33,19 +33,26 @@ namespace App_MotoEmissions
         {
             LoadDataGridViolations();
             LoadDataGridNotifications();
-
         }
+
         void LoadDataGridViolations()
         {
             UserAccount? acc = SessionManager.UserAccount;
             var violation = ViolationDAO.GetViolations(acc.Email);
             this.dataGridViolations.ItemsSource = violation;
         }
+
         void LoadDataGridNotifications()
         {
             UserAccount? acc = SessionManager.UserAccount;
             var noti = NotificationDAO.GetNotificationByOwner(acc);
             this.dataGridNotifications.ItemsSource = noti;
+        }
+
+        // Thêm phương thức để được gọi từ bên ngoài nếu cần làm mới
+        public void ForceRefreshNotifications()
+        {
+            LoadDataGridNotifications();
         }
     }
 }
