@@ -76,7 +76,7 @@ public class InspectionViewModel
                         }
 
                         // Cập nhật trạng thái kiểm định
-                        string updateQuery = "UPDATE Inspection SET Status = 'Completed' WHERE InspectionID = @InspectionID;";
+                        string updateQuery = "UPDATE Inspection SET Status = 'Đã xác nhận' WHERE InspectionID = @InspectionID;";
                         using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection, transaction))
                         {
                             updateCommand.Parameters.AddWithValue("@InspectionID", inspectionId);

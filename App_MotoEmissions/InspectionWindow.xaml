@@ -243,7 +243,7 @@
 
 
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
-                                    <Button Content="Hủy" Width="100" Margin="0,0,10,0"/>
+                                    
                                     <Button Content="Lưu kết quả" Width="100" Background="#27ae60" Foreground="White" Click="SaveInspectionResult_Click"/>
                                 </StackPanel>
                             </StackPanel>
