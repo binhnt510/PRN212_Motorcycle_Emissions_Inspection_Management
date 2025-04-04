@@ -63,7 +63,7 @@
                             <ComboBox Width="150" Margin="0,0,20,0" x:Name="statusComboBox">
                                 <ComboBoxItem Content="Tất cả"/>
                                 <ComboBoxItem Content="Chờ xác nhận"/>
-                                <ComboBoxItem Content="Đã xác nhận"/>
+                                <ComboBoxItem Content="Đã hoàn thành"/>
                             </ComboBox>
 
                             <TextBlock Text="Ngày:" VerticalAlignment="Center" Margin="0,0,10,0"/>

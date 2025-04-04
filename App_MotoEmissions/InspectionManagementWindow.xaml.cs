@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -37,6 +38,12 @@ namespace App_MotoEmissions
         private void CancelRegistration(object sender, RoutedEventArgs e)
         {
             string id = this.txtid.Text;
+            if (id.IsNullOrEmpty()) 
+            
+            {
+                MessageBox.Show("Vui lòng chọn 1 đăng ký", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (!InspectionDAO.GetInspectionById(int.Parse(id)))
             {
                 MessageBox.Show("Trạng thái đã Xác nhận", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -48,7 +55,8 @@ namespace App_MotoEmissions
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                VehicleDAO.DeleteVehicle(int.Parse(id));
+                InspectionDAO.DeleteInspection(int.Parse(id));
+                ClearRegistration(sender, e);
                 LoadDataGridInspections();
             }
         }
@@ -69,6 +77,12 @@ namespace App_MotoEmissions
         private void RegisterInspection(object sender, RoutedEventArgs e)
         {
            Inspection inspection =new Inspection();
+            if (!dpInspectionDate.SelectedDate.HasValue || cbStations.SelectedValue == null || cbVehicles.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             DateTime selectedDate = dpInspectionDate.SelectedDate.Value;
 
             // Lấy ngày hiện tại
