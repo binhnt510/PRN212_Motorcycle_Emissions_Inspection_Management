@@ -27,13 +27,15 @@
 
             public InspectionWindow()
             {
-                InitializeComponent();
+           
+            InitializeComponent();
                 _viewModel = new InspectionViewModel(
-                    "Server=VIVOBOOK_PRO_15;uid=sa;password=123;database=P_Vehicle;Encrypt=True;TrustServerCertificate=True;"
+                    "Server=LAPTOP-82HD84H0;uid=binhnt;password=123;database=P_Vehicle;Encrypt=True;TrustServerCertificate=True;"
                 );
                 SetupEventHandlers();
                 LoadInspectionList();
-            }
+            LoadInspectionList1();
+        }
 
             private void LoadInspectionList(string status = null, DateTime? dateFilter = null)
             {
@@ -43,9 +45,20 @@
                 // Cập nhật cả hai DataGrid với nguồn dữ liệu thống nhất
                 inspectionDataGrid.ItemsSource = _allInspections;
                 DataGridInspections.ItemsSource = _allInspections.Where(i => i.Status == "Chờ xác nhận").ToList();
-            }
 
-            private void SetupEventHandlers()
+            }
+        private void LoadInspectionList1(string status = null, DateTime? dateFilter = null)
+        {
+            // Lưu toàn bộ danh sách kiểm định
+            _allInspections = _viewModel.GetInspectionList(status, dateFilter);
+
+            // Cập nhật cả hai DataGrid với nguồn dữ liệu thống nhất
+            inspectionDataGrid.ItemsSource = _allInspections;
+            DataGridInspections.ItemsSource = _allInspections.Where(i => i.Status == "Đã hoàn thành").ToList();
+
+        }
+
+        private void SetupEventHandlers()
             {
                 statusComboBox.SelectionChanged += (s, e) => ApplyFilters();
                 datePicker.SelectedDateChanged += (s, e) => ApplyFilters();

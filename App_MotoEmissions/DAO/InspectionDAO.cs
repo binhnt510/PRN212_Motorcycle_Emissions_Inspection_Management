@@ -59,7 +59,7 @@ namespace App_MotoEmissions.DAO
             using (PVehicleContext context = new PVehicleContext())
             {
                 
-                var inspection = context.Inspections.FirstOrDefault(v => v.InspectorId == id);
+                Inspection inspection = context.Inspections.FirstOrDefault(v => v.InspectionId == id);
 
                 if (inspection != null)
                 {
